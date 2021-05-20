@@ -1,0 +1,181 @@
+#main {
+	position: relative;
+	overflow-x: hidden;
+	margin-bottom: 10%;
+}
+
+#slider {
+	height: 50vw;
+	width: 200%;
+	transition: transform 1s;
+}
+
+
+.slide-img {
+	position: relative;
+	width: 50%;
+	height: 100%;
+	max-width: 100%;
+	float: left;
+}
+
+#uno {
+	background-image: url("../images/sportingCentro.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#due {
+	background-image: url("../images/sportingAngolo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#i1, #i2, #i3 {
+	display: none;
+}
+
+.pre, .nxt {
+	width: 12%;
+	height: 50vw;
+	position: absolute;
+	cursor: pointer;
+}
+
+.pre {
+	left: 0;
+}
+
+.nxt {
+	right: 0;
+}
+
+.nav {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	bottom: 50px;
+	height: 0;
+}
+
+.dots {
+	width: calc(1rem + 0.6vw);
+	height: calc(1rem + 0.6vw);
+	border-radius: 50%;
+	display: inline-block;
+	cursor: pointer;
+	background: white;
+}
+
+#i2:checked ~ #slider{
+	transform: translateX(-50%);
+}
+
+#i1:checked ~ .nav #dot1,
+#i2:checked ~ .nav #dot2 {
+	background: black;
+}
+
+#info-campo {
+	font-size: calc(1rem + 0.75vw);
+	width: 100%;
+	height: auto;
+	padding-top: 1rem;
+}
+
+#campo {
+	font-family: 'Bebas Neue', cursive;
+  	font-size: calc(1rem + 3vw);
+  	display: flex;
+  	justify-content: space-between;
+}
+
+#info {
+	display: flex;
+	margin-top: 3%;
+	width: 100%;
+}
+
+#info > ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 50%;
+}
+
+#info ul li {
+	display: flex;
+	justify-content: space-between;
+	height: calc(1rem + 2vw);
+}
+
+#prenota {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	width: 50%;
+}
+
+#info-prezzo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#prezzo {
+	font-size: calc(1rem + 3vw);
+}
+
+button {
+    display: inline-flex;
+	justify-content: space-around;
+    position: relative;
+	font-size: calc(0.5rem + 1.3vw);
+	color: white;
+	border: 2px solid white;
+	background-color: black;
+	border-radius: 10px;
+	height: calc(2rem + 2vw);
+	width: calc(2rem + 15vw);
+	outline: none;
+	z-index: 1;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+button:hover {
+    transition: color .4s ease-in;
+}
+
+button:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: ForestGreen;
+    transform: translateX(-101%);
+    transition: transform .2s ease-in;
+    z-index: -1;
+}
+
+button:hover:before {
+    transform: translateX(0%);
+    transition: transform .2s ease-in;
+}
+
+.btn_text, 
+.btn_icon {
+	display: inline-flex;
+	align-items: center;
+	height: 100%;
+}
+
+.btn_icon {
+	font-size: 1.3em;
+}

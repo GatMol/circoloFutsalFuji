@@ -1,0 +1,59 @@
+html {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	background-color: black;
+	color: white;
+}
+
+body {
+	margin: 3% 10%;
+}
+
+header {
+	height: 17vh;
+}
+
+#navbar {
+	z-index: 2;
+	height: 15%;
+	display: inline-flex;
+	top: 0;
+	position: fixed;
+	width: 80%;
+	background-color: black;
+}
+
+.elementoNav {
+	display: inline-flex;
+	align-items: center;
+}
+
+#titoloCircolo {
+	font-family: 'Bebas Neue', cursive;
+  	font-size: calc(1rem + 4vw);
+  	flex-grow: 1;
+}
+
+#menu {
+	list-style: none;
+	font-size: calc(0.5rem + 1.5vw);
+	padding-left: 0;
+	margin: 0;
+}
+
+#menu > li {
+	margin-left: calc(1rem + 1.8vw);
+}
+
+footer .separatore {
+	width: 1px;
+	height: 20px;
+	background-color: white;
+}
+
+footer {
+	height: auto;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
