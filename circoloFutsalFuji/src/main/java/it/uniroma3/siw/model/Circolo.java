@@ -16,13 +16,20 @@ public @Data class Circolo {
 	
 	@NonNull
 	private String nome;
+	
 	@NonNull
 	private String indirizzo;
+	
 	@NonNull
 	private String telefono;
+	
 	@NonNull
 	private String email;
 	
 	private Map<Long, Campo> campi;
 	private PortaleCircolo portale;
+	
+	public Campo getCampo(Long idCampo) {
+		return this.campi.get(idCampo);
+	}
 }

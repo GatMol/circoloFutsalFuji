@@ -25,25 +25,33 @@ public @Data class Campo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
+	
 	@NonNull
 	@Column(nullable = false)
 	private Integer lunghezza;
+	
 	@NonNull
 	@Column(nullable = false)
 	private Integer larghezza;
+	
 	@NonNull
 	@Column(nullable = false)
 	private String tipoCampo;
+	
 	@NonNull
 	@Column(nullable = false)
 	private String tipoTerreno;
+	
 	@NonNull
 	@Column(nullable = false)
-	private Money prezzo;
+	private Integer prezzo;
 	
 	@OneToMany
 	@JoinColumn(name = "campo_id")
 	private Map<Long,Prenotazione> prenotazioni;
-	
 
+	public void aggiungiPrenotazione(Prenotazione pc) {
+		this.prenotazioni.put(pc.getId(), pc);
+		
+	}
 }

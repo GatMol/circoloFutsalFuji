@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@AllArgsConstructor
 public @Data class Utente {
 	
 	@Id
@@ -32,4 +31,10 @@ public @Data class Utente {
 	private String email;
 	private String telefono;
 	
+	public Utente(String nome, String cognome, String email, String telefono) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.telefono = telefono;
+	}
 }
