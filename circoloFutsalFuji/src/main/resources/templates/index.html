@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIW</title>
+    <meta charset="UTF-8">
+    <link href="../static/homePage.css" rel="stylesheet"/>
+    <link href="../static/navBar.css" rel="stylesheet"/>
+    <link href="../static/footer.css" rel="stylesheet"/>
+    <link href="../static/root.css" rel="stylesheet"/>
+    <link href="../static/mediaIndex.css" rel="stylesheet"/>
+    <link href="../static/mediaNavBar.css" rel="stylesheet"/>
+  </head>
+  <body>
+    
+    <!--header della pagina-->
+    <header>
+
+    <!--barra di navigazione-->
+    <nav>
+        
+        <!-- nome circolo-->
+        <div id ="titolo" class="elementoNavBar">Futsal Fuji</div>
+
+        <!-- barra di navigazione-->
+        <div id="menu" class="elementoNavBar">
+
+            <a href="index.html" class="elementoMenu">Home</a>
+            <a href="campi.html" class="elementoMenu">Campi</a>
+            <a href="index.html" class="elementoMenu">Chi siamo</a>
+
+        </div>
+         
+    </nav>
+      
+    </header>
+    
+    <section>
+
+        <div id="sezioneImmagine">
+            <img src="../static/calcio.png"/>
+
+                <button>
+                    PRENOTA UN CAMPO
+                </button>
+        
+        </div>
+
+        <div id="sezioneCentrale">
+
+             <div id="scrittaCentrale">Uno dei migliori centri sportivi di Futsal di Roma sud.</div>
+
+         </div>
+
+         <div id="sezioneFinale">
+            <div id="sezioneInformazioni">
+
+                <div id="imgCircolo" class="informazione">
+                    <img id="immagineCircolo" src="../static/circolo.png"/>
+                </div>
+
+
+                <div class="informazione">
+                    <div th:text="${circolo.descrizione}"  id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
+                </div>
+
+
+            </div>
+         </div>
+     
+    </section>
+    
+    <!--footer della pagina-->
+    <footer>
+        <div id="containerFooter">
+
+            <div th:text="|${circolo.via} ${circolo.citta}|">via da qua 24, Roma, Italia</div>
+
+            <div class="divisorio">|</div>
+
+            <div th:text="${circolo.email}">davidmolitiern@hotmail.it</div>
+
+            <div class="divisorio">|</div>
+
+            <div th:text="${circolo.telefono}">+39 391 1239876</div>  
+
+        </div>
+    </footer>
+    
+  </body>
+</html>

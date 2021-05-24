@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SIW</title>
+    <meta charset="UTF-8">
+    <link href="../static/prenotazione.css" rel="stylesheet"/>
+    <link href="../static/navBar.css" rel="stylesheet"/>
+    <link href="../static/footer.css" rel="stylesheet"/>
+    <link href="../static/root.css" rel="stylesheet"/>
+    <link href="../static/mediaNavBar.css" rel="stylesheet"/>
+    <link href="../static/mediaPrenotazione.css" rel="stylesheet"/>
+  </head>
+  <body>
+    
+    <!--header della pagina-->
+    <header>
+
+    <!--barra di navigazione-->
+    <nav>
+        
+        <!-- nome circolo-->
+        <div id ="titolo" class="elementoNavBar">Futsal Fuji</div>
+
+        <!-- barra di navigazione-->
+        <div id="menu" class="elementoNavBar">
+
+            <a href="index.html" class="elementoMenu">Home</a>
+            <a href="campi.html" class="elementoMenu">Campi</a>
+            <a href="index.html" class="elementoMenu">Chi siamo</a>
+
+        </div>
+         
+    </nav>
+      
+    </header>
+    
+    <section>
+
+        <!--contenitore informazioni prenotazione-->
+        <div id="contenitorePrenotazione" class="prenotazioneOrizzontale">
+
+            <!--contenitore informazioni prenotazione-->
+            <div class="prenotazioneVerticale" class="contenitore">
+                
+                <!--testo prenotazione-->
+                <div id="titoloPrenotazione" class="infoPrenotazioni">PRENOTA IL CAMPO
+                </div>
+
+                <div id="informazioniPrenotazioni" class="infoPrenotazioni">ti invieremo un email di conferma.
+                    il numero di telefono è necessario per sicurezza</div>
+                <!--informazioni prenotazione-->
+                <div id="riepilogoPrenotazione">
+                    Hai selezionato il campo: 1
+                    <div id="prezzo">Prezzo: 5€</div>
+                    <button>PRENOTA</button>
+                </div>
+
+            </div>
+
+            <!--form prenotazione-->
+            <div id="formPrenotazione" class="prenotazioneVerticale" class="contenitore">
+                
+                <!--form nome e cognome-->
+                <div id="formNomeCognome" class="prenotazioneOrizzontale" class="elementoForm">
+
+                    <div class="elementoNomeCognome">
+                        <div>Nome *</div>
+                        <div><form value="Nome"><input class="inputMedio" type="" name=""></form></div>
+                    </div>
+
+                    <div class="elementoNomeCognome" class="prenotazioneVerticale">
+                        <div>Cognome *</div>
+                        <form value="Cognome"><input class="inputMedio" type="" name=""></form>
+                    </div>
+
+                </div>
+
+                <!--form email-->
+                <div class="elementoMailTele" class="prenotazioneOrizzontale">
+
+                    <div  class="elementoForm" class="prenotazioneVerticale">
+                        <div>Email *</div>
+                        <form value="Email"><input class="inputLungo" type="" name=""></form>
+                    </div>
+
+                </div>
+
+                <!--form numero di telefono-->
+                <div class="elementoMailTele" class="prenotazioneOrizzontale">
+
+                    <div class="elementoForm" class="prenotazioneVerticale">
+                        <div>Telefono *</div>
+                        <form value="Telefono"><input class="inputLungo" type="" name=""></form>
+                    </div>
+
+                </div>
+
+                <!--form data-->
+                <div id="formData" class="prenotazioneVerticale">
+
+                    <div id="data" class="prenotazioneOrizzontale">Data</div>
+
+                    <div class="prenotazioneOrizzontale" class="elementoForm">
+                        <!-- form giorno-->
+                        <div class="prenotazioneVerticale">
+                            <div>
+                                <form value="DD"></form><input class="inputPiccolo" type="" name="">
+                                <div>DD*</div>
+                            </div>
+                        </div>
+
+                        <!-- form mese-->
+                        <div>
+                            <form value="MM"></form><input class="inputPiccolo" type="" name="">
+                            <div>MM*</div>
+                        </div>
+
+                        <!-- form anno-->
+                        <div>
+                            <form value="YYYY"></form><input class="inputPiccolo" type="" name="">
+                            <div>YYYY*</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!--form orario-->
+                <div class="prenotazioneOrizzontale" class="elementoForm">
+
+                    <!--form ora inizio-->
+                    <div class="elementoForm">
+                        <form value="hh"></form><input class="inputPiccolo" type="" name="">
+                        <div>h inizio*</div>
+                    </div>
+
+                    <!--form ora fine-->
+                    <div class="elementoForm">
+                        <form value="hh"></form><input class="inputPiccolo" type="" name="">
+                        <div>h fine*</div>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+
+        </div>
+     
+    </section>
+    
+    <!--footer della pagina-->
+    <footer>
+        <div id="containerFooter">
+
+            <div th:text="|${circolo.via} ${circolo.citta}|">via da qua 24, Roma, Italia</div>
+
+            <div class="divisorio">|</div>
+
+            <div th:text="${circolo.email}">davidmolitiern@hotmail.it</div>
+
+            <div class="divisorio">|</div>
+
+            <div th:text="${circolo.telefono}">+39 391 1239876</div>  
+
+        </div>
+    </footer>
+    
+  </body>
+</html>

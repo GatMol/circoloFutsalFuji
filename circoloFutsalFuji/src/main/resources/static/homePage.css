@@ -1,0 +1,82 @@
+#sezioneImmagine{
+	height: auto;
+	width: 100%;
+}
+
+img{
+	width: 100%;
+	height: 56.25%;
+}
+
+button{
+	height: 8%;
+	width: 14%;
+	background-color: white;
+	position: absolute;
+	top: calc(35vw);
+	right: 12%;
+	color: black;
+	border-color: white;
+	border-radius: 2em;
+	font-size: calc(0.3rem + 0.8vw);
+	border-color: black;
+}
+
+#sezioneCentrale{
+	height: auto;
+	width: 30%;
+	display: flex;
+	margin: 5% 35%;
+}
+
+#scrittaCentrale{
+	text-align: center;
+	font-size: calc(0.5rem + 1.25vw);
+	color: white;
+}
+
+#sezioneFinale{
+	height: calc(600px +50%);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+#sezioneInformazioni{
+	width: 85%;
+	height: 85%;
+	position: relative;
+}
+
+.informazione{
+	width: 55%;
+	height: 100%;
+}
+
+#imgCircolo{
+	height: 100%;
+}
+
+#immagineCircolo{
+	height: 100%;
+	border-radius: 10%;
+}
+
+#descrizione{
+	width: 55%;
+	border-radius: 10%;
+	background-color: grey;
+	position: absolute;
+	right: 0%;
+	top: 10%;
+	height: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: calc(0.25rem + 2vw);
+}
+
+
