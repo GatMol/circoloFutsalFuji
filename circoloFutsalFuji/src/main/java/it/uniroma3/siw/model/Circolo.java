@@ -2,7 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.util.Map;
 
-import it.uniroma3.siw.controller.PortaleCircolo;
+import it.uniroma3.siw.service.PortaleCircolo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

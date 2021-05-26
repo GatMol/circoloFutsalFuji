@@ -1,0 +1,19 @@
+@media all and (max-width: 478px) {
+	#info-text {
+		flex-direction: column;
+	}
+
+	#info-text > ul {
+		width: 100%;
+	}
+
+	#prenota {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+
+	#info-prezzo {
+		margin-top: 5%;
+	}
+}
