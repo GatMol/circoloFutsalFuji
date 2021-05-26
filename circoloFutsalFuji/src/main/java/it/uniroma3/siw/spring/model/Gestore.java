@@ -1,4 +1,4 @@
-package it.uniroma3.siw.circoloFutsalFuji.model;
+package it.uniroma3.siw.spring.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
