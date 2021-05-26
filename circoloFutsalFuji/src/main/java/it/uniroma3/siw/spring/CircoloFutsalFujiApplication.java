@@ -1,4 +1,4 @@
-package it.uniroma3.siw.circoloFutsalFuji;
+package it.uniroma3.siw.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

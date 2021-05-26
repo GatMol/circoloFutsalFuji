@@ -1,14 +1,14 @@
-package it.uniroma3.siw.service;
+package it.uniroma3.siw.spring.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.siw.model.Campo;
-import it.uniroma3.siw.model.Circolo;
-import it.uniroma3.siw.model.Prenotazione;
-import it.uniroma3.siw.model.Utente;
+import it.uniroma3.siw.spring.model.Campo;
+import it.uniroma3.siw.spring.model.Circolo;
+import it.uniroma3.siw.spring.model.Prenotazione;
+import it.uniroma3.siw.spring.model.Utente;
 
 @Service
 public class PortaleCircolo {
