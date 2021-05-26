@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title)">
+	<meta charset="UTF-8" />
+    <link th:href="@{/css/homePage.css}" rel="stylesheet"/>
+    <link th:href="@{/css/prenotazione.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mediaPrenotazione.css}" rel="stylesheet"/>
+    <link th:href="@{/css/navBar.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link th:href="@{/css/root.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mediaIndex.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mediaNavBar.css}" rel="stylesheet"/>
+	<title th:text="${title}"></title>
+</head>
+<body>
+	
+	<header th:fragment="header">
+
+    <!--barra di navigazione-->
+    <nav>
+        
+        <!-- nome circolo-->
+        <div id ="titolo" class="elementoNavBar">Futsal Fuji</div>
+
+        <!-- barra di navigazione-->
+        <div id="menu" class="elementoNavBar">
+
+            <a th:href="@{/}" href="index.html" class="elementoMenu">Home</a>
+            <a th:href="@{/}" href="campi.html" class="elementoMenu">Campi</a>
+            <a th:href="@{/}" href="index.html" class="elementoMenu">Chi siamo</a>
+
+        </div>
+         
+    </nav>
+      
+    </header>
+	
+	<!--footer della pagina-->
+    <footer th:fragment="footer">
+        <div id="containerFooter">
+
+            <div>via da qua 24, Roma, Italia</div>
+
+            <div class="divisorio">|</div>
+
+            <div>davidmolitiern@hotmail.it</div>
+
+            <div class="divisorio">|</div>
+
+            <div>+39 391 1239876</div>  
+
+        </div>
+    </footer>
+</body>
+</html>

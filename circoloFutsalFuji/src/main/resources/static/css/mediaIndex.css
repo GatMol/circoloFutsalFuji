@@ -13,4 +13,10 @@
 button{
 	width: 20%;
 }
+
+#prenotaUnCampo{
+	height: 6%;
+	max-height: 45px;
+	min-height: 30px;
+}
 }

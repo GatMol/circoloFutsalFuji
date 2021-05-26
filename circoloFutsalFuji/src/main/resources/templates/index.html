@@ -1,47 +1,19 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>SIW</title>
-    <meta charset="UTF-8">
-    <link href="../static/homePage.css" rel="stylesheet"/>
-    <link href="../static/navBar.css" rel="stylesheet"/>
-    <link href="../static/footer.css" rel="stylesheet"/>
-    <link href="../static/root.css" rel="stylesheet"/>
-    <link href="../static/mediaIndex.css" rel="stylesheet"/>
-    <link href="../static/mediaNavBar.css" rel="stylesheet"/>
-  </head>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/base.html :: headerfiles(title=#{header.homePage})"></head>
   <body>
     
     <!--header della pagina-->
-    <header>
-
-    <!--barra di navigazione-->
-    <nav>
-        
-        <!-- nome circolo-->
-        <div id ="titolo" class="elementoNavBar">Futsal Fuji</div>
-
-        <!-- barra di navigazione-->
-        <div id="menu" class="elementoNavBar">
-
-            <a href="index.html" class="elementoMenu">Home</a>
-            <a href="campi.html" class="elementoMenu">Campi</a>
-            <a href="index.html" class="elementoMenu">Chi siamo</a>
-
-        </div>
-         
-    </nav>
-      
-    </header>
+    <header th:replace="fragments/base.html :: header"></header>
     
     <section>
 
         <div id="sezioneImmagine">
-            <img src="../static/calcio.png"/>
+            <img th:src="@{/images/calcio.png}" />
 
-                <button>
+                <a href="prenotazione.html" id="prenotaUnCampo">
                     PRENOTA UN CAMPO
-                </button>
+                </a>
         
         </div>
 
@@ -55,12 +27,12 @@
             <div id="sezioneInformazioni">
 
                 <div id="imgCircolo" class="informazione">
-                    <img id="immagineCircolo" src="../static/circolo.png"/>
+                    <img th:src="@{/images/circolo.png}" id="immagineCircolo" src="../static/circolo.png"/>
                 </div>
 
 
                 <div class="informazione">
-                    <div th:text="${circolo.descrizione}"  id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
+                    <div id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
                 </div>
 
 
@@ -70,21 +42,7 @@
     </section>
     
     <!--footer della pagina-->
-    <footer>
-        <div id="containerFooter">
-
-            <div th:text="|${circolo.via} ${circolo.citta}|">via da qua 24, Roma, Italia</div>
-
-            <div class="divisorio">|</div>
-
-            <div th:text="${circolo.email}">davidmolitiern@hotmail.it</div>
-
-            <div class="divisorio">|</div>
-
-            <div th:text="${circolo.telefono}">+39 391 1239876</div>  
-
-        </div>
-    </footer>
+    <footer th:replace="fragments/base.html :: footer"></footer>
     
   </body>
 </html>

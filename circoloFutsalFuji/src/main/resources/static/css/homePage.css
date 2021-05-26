@@ -8,8 +8,9 @@ img{
 	height: 56.25%;
 }
 
-button{
+#prenotaUnCampo{
 	height: 8%;
+	min-height: 25px;
 	width: 14%;
 	background-color: white;
 	position: absolute;
@@ -20,6 +21,10 @@ button{
 	border-radius: 2em;
 	font-size: calc(0.3rem + 0.8vw);
 	border-color: black;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #sezioneCentrale{
