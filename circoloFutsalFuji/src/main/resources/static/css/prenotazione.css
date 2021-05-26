@@ -1,0 +1,94 @@
+#contenitorePrenotazione{
+	margin-top: 100px;
+	display: flex;
+	height: auto;
+	width: 100%;
+	margin-left: 20%:
+	margin-right: 20%: 
+}
+
+.prenotazioneOrizzontale{
+	display: flex;
+}
+
+.prenotazioneVerticale{
+	display: flex;
+	flex-direction: column;
+}
+
+.contenitore{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 50%;
+}
+
+.infoPrenotazioni{
+	width: 50%;
+}
+
+#titoloPrenotazione{
+	font-size: calc(0.5rem + 1vw);
+	margin-bottom: 3%;
+}
+
+#informazioniPrenotazioni{
+	font-size: calc(0.5rem + 1vw);
+	margin-bottom: 10%;
+	border-bottom: 2px solid;
+	border-color: white;
+	padding-bottom: 2%;
+}
+
+#riepilogoPrenotazione{
+	font-size: calc(0.5rem + 1vw);
+}
+
+#formNomeCognome{
+	display: flex;
+	justify-content: space-between;
+}
+
+.inputMedio{
+	width: 100%;
+	height: 20px;
+}
+
+.inputLungo{
+	width: 100%;
+	height: 20px;
+}
+
+.inputPiccolo{
+	width: 40%;
+	height: 20px;
+}
+
+.elementoForm{
+	margin-top: 3%;
+}
+
+#formPrenotazione{
+	font-size: calc(0.4rem + 1vw);
+}
+
+#formData{
+	margin-top: 5%;
+}
+
+#data{
+	margin-bottom: 3%;
+}
+
+button{
+	height: 50px;
+	width: 35%;
+	background-color: white;
+	color: black;
+	border-color: white;
+	border-radius: 2em;
+	font-size: calc(0.3rem + 0.8vw);
+	border-color: black;
+	margin-top: 3%;
+}

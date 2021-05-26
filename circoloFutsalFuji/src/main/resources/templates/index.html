@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/base.html :: headerfiles(title=#{header.homePage})"></head>
+  <body>
+    
+    <!--header della pagina-->
+    <header th:replace="fragments/base.html :: header"></header>
+    
+    <section>
+
+        <div id="sezioneImmagine">
+            <img th:src="@{/images/calcio.png}" />
+
+                <a href="prenotazione.html" id="prenotaUnCampo">
+                    PRENOTA UN CAMPO
+                </a>
+        
+        </div>
+
+        <div id="sezioneCentrale">
+
+             <div id="scrittaCentrale">Uno dei migliori centri sportivi di Futsal di Roma sud.</div>
+
+         </div>
+
+         <div id="sezioneFinale">
+            <div id="sezioneInformazioni">
+
+                <div id="imgCircolo" class="informazione">
+                    <img th:src="@{/images/circolo.png}" id="immagineCircolo" src="../static/circolo.png"/>
+                </div>
+
+
+                <div class="informazione">
+                    <div id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
+                </div>
+
+
+            </div>
+         </div>
+     
+    </section>
+    
+    <!--footer della pagina-->
+    <footer th:replace="fragments/base.html :: footer"></footer>
+    
+  </body>
+</html>

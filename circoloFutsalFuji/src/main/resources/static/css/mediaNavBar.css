@@ -1,0 +1,17 @@
+@media(max-width: 700px){
+	nav{
+		height: auto;
+ 	align-items: center;
+  	 flex-direction: column;
+  	 margin-bottom: 20px;
+}
+
+#titolo{
+	text-align: center;
+	justify-content: center;
+}
+
+#menu{
+  width: 90%;
+}
+}

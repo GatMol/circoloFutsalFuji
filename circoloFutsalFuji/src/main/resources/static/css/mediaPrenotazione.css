@@ -1,0 +1,56 @@
+@media(max-width: 700px){
+
+#contenitorePrenotazione{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 100px;
+}
+
+.contenitore{
+	width: 100%;
+}
+
+.infoPrenotazioni{
+	width: 100%;
+	text-align: center;
+}
+
+#formPrenotazione{
+	margin-top: -50px;
+}
+
+#informazioniPrenotazioni{
+	text-align: center;
+}
+
+#riepilogoPrenotazione{
+	text-align: center;
+}
+
+#formNomeCognome{
+	display: flex;
+	flex-direction: column;
+}
+
+.inputMedio{
+	width: 100%;
+}
+
+.elementoNomeCognome{
+	margin-top: 3%;
+}
+
+.elementoMailTele{
+	width: 100%;
+}
+
+.inputLungo{
+	width: 100%;
+}
+
+button{
+	position: relative;
+	top: 420px;
+}
+}
