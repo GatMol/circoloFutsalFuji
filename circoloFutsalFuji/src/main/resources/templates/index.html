@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:replace="fragments/base.html :: headerfiles(title=#{header.homePage})"></head>
+  <head>
+  <link th:href="@{/css/homePage.css}" rel="stylesheet">
+  </head>
   <body>
     
     <!--header della pagina-->
@@ -11,7 +14,7 @@
         <div id="sezioneImmagine">
             <img th:src="@{/images/calcio.png}" />
 
-                <a href="prenotazione.html" id="prenotaUnCampo">
+                <a th:href="@{/campi}" id="prenotaUnCampo">
                     PRENOTA UN CAMPO
                 </a>
         
@@ -34,7 +37,8 @@
                 <div class="informazione">
                     <div id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
                 </div>
-
+				
+            	<a th:href="@{/gestore}">Clicca per passare al gestore</a>
 
             </div>
          </div>

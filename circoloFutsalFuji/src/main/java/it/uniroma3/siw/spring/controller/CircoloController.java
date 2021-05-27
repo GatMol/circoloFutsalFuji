@@ -15,10 +15,26 @@ public class CircoloController {
 	@Autowired
 	private CampoService campoService;
 	
-	@RequestMapping(value = "/campo/{id}" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/campi", method = RequestMethod.GET)
+	public String getCampi(Model model) {
+		model.addAttribute("campi", this.campoService.tutti());
+		return "campi.html";
+	}
+	
+	@RequestMapping(value = "/campo/{id}", method = RequestMethod.GET)
 	public String getCampo(@PathVariable Long id, Model model) {
 		model.addAttribute("campo", this.campoService.campoPerId(id));
 		return "campo.html";
+	}
+	
+	@RequestMapping(value = "/gestore", method = RequestMethod.GET)
+	public String getGestore(Model model) {
+		return "gestore.html";
+	}
+	
+	@RequestMapping(value = "/gestoreCampo", method = RequestMethod.GET)
+	public String getGestoreCampo(Model model) {
+		return "gestoreCampo.html";
 	}
 
 }

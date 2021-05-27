@@ -3,7 +3,7 @@
 <head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.campi})"></head>
 <head>
 <link th:href="@{/css/campi.css}" rel="stylesheet">
-<link th:href="@{/css/campi584.css}" rel="stylesheet">
+<link th:href="@{/css/mediaCampi.css}" rel="stylesheet">
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
@@ -13,15 +13,16 @@
 				<li th:each="campo : ${campi}">
 					<div class="item">
 						<div class="info-campo">
-							<div class="top-box" th:text="#{campo} + *{id}">Campo 1</div>
-							<div class="prezzo"><span th:text="#{prezzo} + '/h'">Prezzo/h:</span><span th:text="*{prezzo}">50€</span></div>
+							<div class="top-box" th:text="#{campo} + ${campo.id}">Campo 1</div>
+							<div class="prezzo"><span th:text="#{prezzo} + '/h:'">Prezzo/h:</span><span th:text="${campo.prezzo} + '€'">50€</span></div>
 							<a class="bottone-info" 
-								th:text="#{piuInfo}" 
-								th:href="@{'/campo' + '/' + *{id}}">
+								th:text="#{piuInfo} + ':'" 
+								th:href="@{'/campo' + '/' + ${campo.id}}"
+								>
 								Informazioni
 							</a>
 						</div>
-						<img class="img-campo" th:src="@{/images/sportingCentro.png}" alt=""></img>
+						<img class="img-campo" th:src="@{${campo.photoImage1Path}}" alt=""></img>
 					</div>
 				</li>
 			</ul>			

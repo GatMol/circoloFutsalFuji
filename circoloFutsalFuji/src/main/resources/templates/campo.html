@@ -15,11 +15,11 @@
 			<input type="radio" name="images" id="i2">
 					
 			<div id="slider">
-				<div class="slide-img" id="uno">
+				<div class="slide-img" id="uno" th:style="'background-image: url(' + @{${campo.photoImage1Path}} + ');'">
 					<label for="i2" class="pre"></label>
 					<label for="i2" class="nxt"></label>
 				</div>
-				<div class="slide-img" id="due">
+				<div class="slide-img" id="uno" th:style="'background-image: url(' + @{${campo.photoImage2Path}} + ');'">
 					<label for="i1" class="pre"></label>
 					<label for="i1" class="nxt"></label>
 				</div>
@@ -32,34 +32,29 @@
 			
 			<div id="info-campo" th:if=${campo} th:object="${campo}">
 				<div id="campo" th:text="#{campo} + *{id}">CAMPO 1</div>
-				<div id="info">
+				<div id="info-text">
 				<ul>
 					<li>
-						<span th:text="#{campo.lunghezza}">Lunghezza:</span>
-						<span th:text="*{lunghezza}">10m</span>
+						<span th:text="#{campo.lunghezza} + ':'">Lunghezza:</span>
+						<span th:text="*{lunghezza} + 'm'">10m</span>
 					</li>
 					<li>
-						<span th:text="#{campo.larghezza}">Larghezza:</span>
-						<span th:text="*{larghezza}">10m</span>
+						<span th:text="#{campo.larghezza} + ':'">Larghezza:</span>
+						<span th:text="*{larghezza} + 'm'">10m</span>
 					</li>
 					<li>
-						<span th:text="#{campo.tipoCampo}">Tipo campo:</span>
+						<span th:text="#{campo.tipoCampo} + ':'">Tipo campo:</span>
 						<span th:text="*{tipoCampo}">outdoor</span>
 					</li>
 					<li>
-						<span th:text="#{campo.tipoTerreno}">Tipo terreno:</span>
+						<span th:text="#{campo.tipoTerreno} + ':'">Tipo terreno:</span>
 						<span th:text="*{tipoTerreno}">sintetico</span>
 					</li>
-					<li>
-						<span th:text="#{campo.prezzo}">Prezzo/h:</span>
-						<span th:text="*{prezzo}">60euro</span>
-					</li>
 				</ul>
-				<form th:action="@{/}">
-				<div id="prenota">
+				<form th:action="@{/}" id="prenota">
 					<div id="info-prezzo">
-						<span th:text="#{campo.prezzo}">Prezzo/h:</span>
-						<span id="prezzo">60€</span>	
+						<span th:text="#{prezzo} + '/h:'">Prezzo/h:</span>
+						<span th:text="*{prezzo} + '€'" id="prezzo">60€</span>	
 					</div>
 					<button href="">
 						<span class="btn_text" th:text="#{prenotaOra}">PRENOTA ORA</span>
@@ -68,7 +63,6 @@
 						</span>
 					</button>
 					<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-				</div>
 				</form>
 			</div>
 		</div>
