@@ -1,0 +1,102 @@
+/*table of contents
+  - ListaCampi
+  - listItemContent
+  - BottoneInformati
+  - AnimazioneBottone
+/*
+
+/*
+ =============
+ ListaCampi
+ =============
+*/
+
+#main-content {
+	font-size: calc(0.5rem + 2vw);
+	margin-bottom: 15%;
+}
+
+#main-content > ul {
+	padding-left: 0;
+	margin: 0;
+}
+
+#main-content li {
+	padding-bottom: 5%;
+	margin-bottom: 5%;
+	border-bottom: 2px solid white;
+	list-style: none;
+}
+
+/*listItemContent*/
+
+.item {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info-campo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-right: 5%;
+}
+
+.top-box {
+	font-family: 'Bebas Neue', cursive;
+  	font-size: calc(1rem + 3vw);
+}
+
+.prezzo {
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+/* BottoneInformati */
+.bottone-info {
+    position: relative;
+	color: ForestGreen;
+	border: 2px solid ForestGreen;
+	background-color: black;
+	border-radius: 10px;
+	font-size: calc(1rem + 1vw);
+	outline: none;
+	height: 22%;
+	width: 100%;
+	z-index: 1;
+	overflow: hidden;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+/* AnimazioneBottone */
+.bottone-info:hover {
+	color: white;
+    transition: color .3s ease-in;
+}
+
+.bottone-info:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: ForestGreen;
+    transform: translateX(-100%);
+    transition: transform .3s ease-in;
+    z-index: -1;
+}
+
+.bottone-info:hover:before {
+    transform: translateX(0%);
+    transition: transform .3s ease-in;
+}
+
+.img-campo {
+	height: auto;
+	width: 50%;
+	max-width: 100%;
+}

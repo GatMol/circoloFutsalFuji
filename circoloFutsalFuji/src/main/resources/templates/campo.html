@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.campo})"></head>
+<head>
+<link th:href="@{/css/campo.css}" rel="stylesheet">
+<link th:href="@{/css/campo478.css}" rel="stylesheet">
+<link th:href="@{/css/campo741.css}" rel="stylesheet">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<section>
+		<div id="main">
+			
+			<input type="radio" name="images" id="i1" checked>
+			<input type="radio" name="images" id="i2">
+					
+			<div id="slider">
+				<div class="slide-img" id="uno">
+					<label for="i2" class="pre"></label>
+					<label for="i2" class="nxt"></label>
+				</div>
+				<div class="slide-img" id="due">
+					<label for="i1" class="pre"></label>
+					<label for="i1" class="nxt"></label>
+				</div>
+			</div>
+				
+			<div class="nav">
+				<label class="dots" id="dot1" for="i1"></label>
+				<label class="dots" id="dot2" for="i2"></label>
+			</div>
+			
+			<div id="info-campo" th:if=${campo} th:object="${campo}">
+				<div id="campo" th:text="#{campo} + *{id}">CAMPO 1</div>
+				<div id="info">
+				<ul>
+					<li>
+						<span th:text="#{campo.lunghezza}">Lunghezza:</span>
+						<span th:text="*{lunghezza}">10m</span>
+					</li>
+					<li>
+						<span th:text="#{campo.larghezza}">Larghezza:</span>
+						<span th:text="*{larghezza}">10m</span>
+					</li>
+					<li>
+						<span th:text="#{campo.tipoCampo}">Tipo campo:</span>
+						<span th:text="*{tipoCampo}">outdoor</span>
+					</li>
+					<li>
+						<span th:text="#{campo.tipoTerreno}">Tipo terreno:</span>
+						<span th:text="*{tipoTerreno}">sintetico</span>
+					</li>
+					<li>
+						<span th:text="#{campo.prezzo}">Prezzo/h:</span>
+						<span th:text="*{prezzo}">60euro</span>
+					</li>
+				</ul>
+				<form th:action="@{/}">
+				<div id="prenota">
+					<div id="info-prezzo">
+						<span th:text="#{campo.prezzo}">Prezzo/h:</span>
+						<span id="prezzo">60€</span>	
+					</div>
+					<button href="">
+						<span class="btn_text" th:text="#{prenotaOra}">PRENOTA ORA</span>
+						<span class="btn_icon">
+							<ion-icon name="football-outline"></ion-icon>
+						</span>
+					</button>
+					<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+				</div>
+				</form>
+			</div>
+		</div>
+		<div th:unless="${campo}" th:text="nonTrovato">Non trovato</div>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
