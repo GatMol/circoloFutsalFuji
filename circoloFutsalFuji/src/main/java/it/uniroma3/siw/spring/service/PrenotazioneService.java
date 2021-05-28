@@ -25,7 +25,7 @@ public class PrenotazioneService {
 	public List<Prenotazione> tutteLePrenotazioni(){
 		return (List<Prenotazione>) prenotazioneRepository.findAll(); 
 	}
-
+	
 	@Transactional
 	public boolean alreadyExists(Prenotazione prenotazione) {
 		List<Prenotazione> prenotazioni = prenotazioneRepository.findPrenotazione(prenotazione);

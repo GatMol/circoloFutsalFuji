@@ -31,7 +31,6 @@ public class PrenotazioneValidator implements Validator{
 			if(this.prenotazioneService.alreadyExists((Prenotazione) o))
 				errors.reject("duplicato");
 		}
-		
 	}
 
 	@Override
