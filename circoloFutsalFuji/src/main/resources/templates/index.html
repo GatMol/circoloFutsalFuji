@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head th:replace="fragments/base.html :: headerfiles(title=#{header.homePage})"></head>
+  <head>
+    <link th:href="@{/css/homePage.css}" rel="stylesheet">
+    <link th:href="@{/css/mediaIndex.css}" rel="stylesheet"/>
+  </head>
   <body>
     
     <!--header della pagina-->
-    <header th:replace="fragments/base.html :: header"></header>
+    <header th:replace="fragments/base.html :: intestazione"></header>
     
     <section>
 
         <div id="sezioneImmagine">
             <img th:src="@{/images/calcio.png}" />
 
-                <a th:href="@{prenotazione}" href="prenotazione.html" id="prenotaUnCampo">
+
+                <a th:href="@{/prenotaUnCampo}" href="prenotazione.html" id="prenotaUnCampo">
+
+                <a th:href="@{/campi}" id="prenotaUnCampo">
                     PRENOTA UN CAMPO
                 </a>
         
@@ -19,7 +26,7 @@
 
         <div id="sezioneCentrale">
 
-             <div id="scrittaCentrale">Uno dei migliori centri sportivi di Futsal di Roma sud.</div>
+             <div th:text="#{messaggioDiBenvenuto}" id="scrittaCentrale">Uno dei migliori centri sportivi di Futsal di Roma sud.</div>
 
          </div>
 
@@ -32,9 +39,10 @@
 
 
                 <div class="informazione">
-                    <div id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
+                    <div th:text="#{descrizioneCircolo}" id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
                 </div>
-
+				
+            	<a th:href="@{/gestore}">Clicca per passare al gestore</a>
 
             </div>
          </div>
@@ -42,7 +50,7 @@
     </section>
     
     <!--footer della pagina-->
-    <footer th:replace="fragments/base.html :: footer"></footer>
+    <footer th:replace="fragments/base.html :: fondo"></footer>
     
   </body>
 </html>

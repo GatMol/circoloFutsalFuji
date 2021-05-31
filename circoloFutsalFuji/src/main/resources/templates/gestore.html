@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.gestore})"></head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	
+	<a th:href="@{/gestoreCampo}">clicca per creare un campo</a>
+	
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

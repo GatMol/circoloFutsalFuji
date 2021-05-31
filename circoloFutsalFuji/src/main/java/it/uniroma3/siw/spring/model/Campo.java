@@ -34,12 +34,29 @@ public @Data class Campo {
 	@Column(nullable = false)
 	private Integer prezzo;
 	
+	@Column(nullable = false)
+	private String img1;
+	
+	@Column(nullable = false)
+	private String img2;
+	
 	@OneToMany
 	@JoinColumn(name = "campo_id")
 	private Map<Long,Prenotazione> prenotazioni;
 
 	public void aggiungiPrenotazione(Prenotazione pc) {
 		this.prenotazioni.put(pc.getId(), pc);
+	}
+	
+	public String getPhotoImage1Path() {
+		if(this.img1 == null || this.id == null) return null;
 		
+		return "/campo-photos/" + id + "/" + this.img1;
+	}
+	
+	public String getPhotoImage2Path() {
+		if(this.img2 == null || this.id == null) return null;
+		
+		return "/campo-photos/" + id + "/" + this.img2;
 	}
 }

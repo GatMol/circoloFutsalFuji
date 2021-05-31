@@ -2,19 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles(title)">
 	<meta charset="UTF-8" />
-    <link th:href="@{/css/homePage.css}" rel="stylesheet"/>
-    <link th:href="@{/css/prenotazione.css}" rel="stylesheet"/>
-    <link th:href="@{/css/mediaPrenotazione.css}" rel="stylesheet"/>
     <link th:href="@{/css/navbar.css}" rel="stylesheet"/>
     <link th:href="@{/css/footer.css}" rel="stylesheet"/>
     <link th:href="@{/css/root.css}" rel="stylesheet"/>
-    <link th:href="@{/css/mediaIndex.css}" rel="stylesheet"/>
     <link th:href="@{/css/mediaNavBar.css}" rel="stylesheet"/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+	<link th:href="@{https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@300;700&display=swap}" rel="stylesheet"> 
+	<link th:href="@{https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap}" rel="stylesheet"> 
 	<title th:text="${title}"></title>
 </head>
 <body>
 	
-	<header th:fragment="header">
+	<header th:fragment="intestazione">
 
     <!--barra di navigazione-->
     <nav>
@@ -25,9 +26,9 @@
         <!-- barra di navigazione-->
         <div id="menu" class="elementoNavBar">
 
-            <a th:href="@{/}" href="index.html" class="elementoMenu">Home</a>
-            <a th:href="@{/}" href="campi.html" class="elementoMenu">Campi</a>
-            <a th:href="@{/}" href="index.html" class="elementoMenu">Chi siamo</a>
+            <a th:href="@{/home}" href="index.html" class="elementoMenu">Home</a>
+            <a th:href="@{/campi}" href="campi.html" class="elementoMenu">Campi</a>
+            <a th:href="@{/home}" href="index.html" class="elementoMenu">Chi siamo</a>
 
         </div>
          
@@ -36,7 +37,7 @@
     </header>
 	
 	<!--footer della pagina-->
-    <footer th:fragment="footer">
+    <footer th:fragment="fondo">
         <div id="containerFooter">
 
             <div>via da qua 24, Roma, Italia</div>

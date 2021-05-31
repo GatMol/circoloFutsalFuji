@@ -21,11 +21,9 @@ public class PrenotazioneValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "giorno", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mese", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "anno", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "hinizio", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "hfine", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "data", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orarioInizio", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orarioFine", "required");
 		
 		if(!errors.hasErrors()) {
 			if(this.prenotazioneService.alreadyExists((Prenotazione) o))

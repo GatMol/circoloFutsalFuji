@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.spring.model.Campo;
 import it.uniroma3.siw.spring.model.Prenotazione;
+import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.PrenotazioneService;
 
 @Controller
@@ -22,9 +24,13 @@ public class PrenotazioneController {
 	
 	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione,
+								  @ModelAttribute("utente") Utente utente, 
+								  @ModelAttribute("campo") Campo campo,
 										Model model, BindingResult bindingResult) {
+		prenotazione.setUtente(utente);
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			campo.aggiungiPrenotazione(prenotazione);
 			prenotazioneService.inserisci(prenotazione);
 			return "campi.html";
 		}

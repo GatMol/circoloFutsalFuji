@@ -27,7 +27,7 @@ public @Data class Prenotazione {
 	private LocalTime orarioInizio;
 	
 	@Column(nullable = false)
-	private LocalTime orarioFIne;
+	private LocalTime orarioFine;
 	
 	@ManyToOne
 	private Utente utente;
