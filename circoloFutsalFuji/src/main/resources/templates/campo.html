@@ -3,8 +3,8 @@
 <head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.campo})"></head>
 <head>
 <link th:href="@{/css/campo.css}" rel="stylesheet">
-<link th:href="@{/css/campo478.css}" rel="stylesheet">
-<link th:href="@{/css/campo741.css}" rel="stylesheet">
+<link th:href="@{/css/campo478.css}" rel="stylesheet" media="all and (max-width: 478px)">
+<link th:href="@{/css/campo741.css}" rel="stylesheet" media="all and (max-width: 741px)">
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
@@ -53,7 +53,7 @@
 				</ul>
 				<form th:action="@{/}" id="prenota">
 					<div id="info-prezzo">
-						<span th:text="#{prezzo} + '/h:'">Prezzo/h:</span>
+						<span th:text="#{campo.prezzo} + '/h:'">Prezzo/h:</span>
 						<span th:text="*{prezzo} + '€'" id="prezzo">60€</span>	
 					</div>
 					<button href="">

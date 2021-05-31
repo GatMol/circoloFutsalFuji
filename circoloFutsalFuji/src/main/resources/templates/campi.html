@@ -14,7 +14,7 @@
 					<div class="item">
 						<div class="info-campo">
 							<div class="top-box" th:text="#{campo} + ${campo.id}">Campo 1</div>
-							<div class="prezzo"><span th:text="#{prezzo} + '/h:'">Prezzo/h:</span><span th:text="${campo.prezzo} + '€'">50€</span></div>
+							<div class="prezzo"><span th:text="#{campo.prezzo} + '/h:'">Prezzo/h:</span><span th:text="${campo.prezzo} + '€'">50€</span></div>
 							<a class="bottone-info" 
 								th:text="#{piuInfo} + ':'" 
 								th:href="@{'/campo' + '/' + ${campo.id}}"

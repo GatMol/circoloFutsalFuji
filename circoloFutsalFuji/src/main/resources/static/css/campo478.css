@@ -1,8 +1,4 @@
 @media all and (max-width: 478px) {
-	#info-text {
-		flex-direction: column;
-	}
-
 	#info-text > ul {
 		width: 100%;
 	}
@@ -15,5 +11,9 @@
 
 	#info-prezzo {
 		margin-top: 5%;
+	}
+	
+	#info-text {
+		flex-direction: column;
 	}
 }

@@ -1,0 +1,45 @@
+html {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 18px;
+	background-color: black;
+	color: white;
+}
+
+body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	margin: 0 10%;
+}
+
+header {
+	top: 0;
+	height: 15vh;
+}
+
+:link {
+	text-decoration: none;
+}
+
+:visited {
+	color: inherit;
+}
+
+/*=======
+  Footer
+  =======
+*/
+
+footer .separatore {
+	width: 1px;
+	height: 20px;
+	background-color: white;
+}
+
+
+footer {
+	height: 10vw;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
