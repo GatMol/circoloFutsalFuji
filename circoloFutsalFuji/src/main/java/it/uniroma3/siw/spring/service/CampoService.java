@@ -22,6 +22,7 @@ public class CampoService {
 		return this.campoRepository.save(c);
 	}
 	
+	@Transactional
 	public Campo campoPerId(Long id) {
 		Optional<Campo> optional = this.campoRepository.findById(id);
 		if(optional.isPresent()) 
@@ -30,7 +31,17 @@ public class CampoService {
 			return null;
 	}
 
+	@Transactional
 	public List<Campo> tutti() {
 		return (List<Campo>) this.campoRepository.findAll();
+	}
+
+	@Transactional
+	public void rimuoviCampo(Campo c) {
+		this.campoRepository.delete(c);
+	}
+
+	public void rimuoviCampoPerId(Long id) {
+		this.campoRepository.deleteById(id);
 	}
 }

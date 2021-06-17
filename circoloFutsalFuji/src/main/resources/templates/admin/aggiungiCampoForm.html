@@ -11,7 +11,7 @@
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<section>
 	<h1>AGGIUNGI CAMPO</h1>
-	<form th:action="@{/aggiungiCampo}" method="POST" enctype="multipart/form-data" th:object="${campo}"}>
+	<form th:action="@{/admin/aggiungiCampo}" method="POST" enctype="multipart/form-data" th:object="${campo}"}>
 		<!--Per dire al browser che è una form che contiene un file upload-->
 		<div id="form">
 			<div class="container-field">
@@ -19,8 +19,7 @@
 					<div class="name-field" th:text="#{campo.lunghezza}">
 						Lunghezza
 					</div>
-					<input type="number" min="25" max="42" th:field="*{lunghezza}"
-						required />
+					<input type="number" min="25" max="42" th:field="*{lunghezza}"/>
 				</span>
 				<span th:if="${#fields.hasErrors('lunghezza')}" 
                 	th:errors="*{lunghezza}" th:style="'color:red'">
@@ -31,7 +30,7 @@
                 	<div class="name-field" th:text="#{campo.larghezza}">
                 	Larghezza
                 	</div>
-                	<input type="number" min="15" max="25" th:field="*{larghezza}" required/>
+                	<input type="number" min="15" max="25" th:field="*{larghezza}"/>
                 </span>
                 <span th:if="${#fields.hasErrors('larghezza')}" 
                 	th:errors="*{larghezza}" th:style="'color:red'">
@@ -83,7 +82,7 @@
                 	<div class="name-field" th:text="#{campo.prezzo} + '/h'">
                 	Prezzo
                 	</div>
-                	<input type="number" min="0" th:field="*{prezzo}" required/>
+                	<input type="number" min="0" th:field="*{prezzo}"/>
                 </span>
                 <span th:if="${#fields.hasErrors('prezzo')}" 
                 	th:errors="*{prezzo}" th:style="'color:red'">

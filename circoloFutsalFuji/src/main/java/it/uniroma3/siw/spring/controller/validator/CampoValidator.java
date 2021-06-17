@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.spring.model.Campo;
@@ -14,11 +15,8 @@ public class CampoValidator implements Validator {
 		int lunghezza = campo.getLunghezza();
 		int larghezza = campo.getLarghezza();
 		String tipoCampo = campo.getTipoCampo().trim();
-		String tipoTerreno = campo.getTipoTerreno().trim();
 		int prezzo = campo.getPrezzo();
-		String img1 = campo.getImg1();
-		String img2 = campo.getImg2();
-		
+
 		if(lunghezza < 0)
 			errors.rejectValue("lunghezza", "negativo");
 		else if(lunghezza == 0)
@@ -44,19 +42,13 @@ public class CampoValidator implements Validator {
 			errors.rejectValue("tipoCampo", "invalid");
 		}
 		
-		if(tipoTerreno.isEmpty())
-			errors.rejectValue("tipoTerreno", "required");
-	
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tipoTerreno", "required");
+			
 		if(prezzo < 0)
 			errors.rejectValue("prezzo", "negativo");
 		
-		if(img1==null) {
-			errors.rejectValue("img1", "required");
-		}
-		
-		if(img2==null) {
-			errors.rejectValue("img2", "required");
-		}
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "img1", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "img2", "required");
 	}
 	
 	@Override

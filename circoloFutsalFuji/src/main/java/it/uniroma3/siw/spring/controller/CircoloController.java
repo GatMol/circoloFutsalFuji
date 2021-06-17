@@ -26,15 +26,4 @@ public class CircoloController {
 		model.addAttribute("campo", this.campoService.campoPerId(id));
 		return "campo.html";
 	}
-	
-	@RequestMapping(value = "/gestore", method = RequestMethod.GET)
-	public String getGestore(Model model) {
-		return "gestore.html";
-	}
-	
-	@RequestMapping(value = "/gestoreCampo", method = RequestMethod.GET)
-	public String getGestoreCampo(Model model) {
-		return "gestoreCampo.html";
-	}
-
 }

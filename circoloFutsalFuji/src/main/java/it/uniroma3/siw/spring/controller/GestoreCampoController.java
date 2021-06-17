@@ -2,14 +2,13 @@ package it.uniroma3.siw.spring.controller;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,28 +28,20 @@ public class GestoreCampoController {
 	@Autowired
 	private CampoValidator campoValidator;
 
-	@RequestMapping(value = "/aggiungiCampo", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/aggiungiCampo", method = RequestMethod.GET)
 	public String newCampo(Model model) {
 		model.addAttribute("campo", new Campo());
-		return "aggiungiCampoForm.html";
+		return "admin/aggiungiCampoForm.html";
 	}
 
-	@RequestMapping(value = "/aggiungiCampo", method = RequestMethod.POST)
-	public String salvaCampo(@ModelAttribute(name = "campo") Campo campo, Model model, HttpSession session,
+	@RequestMapping(value = "/admin/aggiungiCampo", method = RequestMethod.POST)
+	public String salvaCampo(@ModelAttribute(name = "campo") Campo campo, Model model,
 			@RequestParam("image1") MultipartFile multipartFile1, @RequestParam("image2") MultipartFile multipartFile2,
-			BindingResult campoBindingResult) throws IOException {
+			BindingResult campoBindingResult){
 
-		String fileName1;
-		String fileName2;
-		if (session.getAttribute("image1") != null) {
-			fileName1 = (String) session.getAttribute("image1");
-		}
-		if (session.getAttribute("image2") != null) {
-			fileName2 = (String) session.getAttribute("image2");
-		}
-
-		fileName1 = StringUtils.cleanPath(multipartFile1.getOriginalFilename());
-		fileName2 = StringUtils.cleanPath(multipartFile2.getOriginalFilename());
+		String fileName1 = StringUtils.cleanPath(multipartFile1.getOriginalFilename());
+		String fileName2 = StringUtils.cleanPath(multipartFile2.getOriginalFilename());
+		
 		campo.setImg1(fileName1);
 		campo.setImg2(fileName2);
 
@@ -68,18 +59,27 @@ public class GestoreCampoController {
 			} catch (IOException e) {
 				campoBindingResult.rejectValue("img1", "required");
 				campoBindingResult.rejectValue("img2", "required");
-				return "aggiungiCampoForm.html";
+				return "admin/aggiungiCampoForm.html";
 			}
 
 			model.addAttribute("campi", this.campoService.tutti());
-			session.invalidate();
 			return "campi.html";
 		}
 
 		else {
-			session.setAttribute("image1", fileName1);
-			session.setAttribute("image2", fileName2);
-			return "aggiungiCampoForm.html";
+			return "admin/aggiungiCampoForm.html";
 		}
+	}
+	
+	@RequestMapping(value = "/admin/rimuoviCampo", method = RequestMethod.GET)
+	public String showCampiAdmin(Model model) {
+		model.addAttribute("campi", this.campoService.tutti());
+		return "admin/campiAdmin.html";
+	}
+	
+	@RequestMapping(value = "/admin/rimuoviCampo/{id}", method = RequestMethod.POST)
+	public String rimuoviCampi(Model model, @PathVariable("id") Long id) {
+		this.campoService.rimuoviCampoPerId(id);
+		return this.showCampiAdmin(model);
 	}
 }
