@@ -9,5 +9,4 @@ public class CircoloFutsalFujiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CircoloFutsalFujiApplication.class, args);
 	}
-
 }
