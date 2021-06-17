@@ -8,6 +8,9 @@
     <link th:href="@{/css/mediaNavBar.css}" rel="stylesheet"/>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link th:href="@{/css/navbar.css}" rel="stylesheet">
+	<link th:href="@{/css/globalStyle.css}" rel="stylesheet">
+	<link th:href="@{/css/mediaNavbar.css}" rel="stylesheet">
 	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
 	<link th:href="@{https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@300;700&display=swap}" rel="stylesheet"> 
 	<link th:href="@{https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap}" rel="stylesheet"> 
@@ -16,6 +19,7 @@
 <body>
 	
 	<header th:fragment="intestazione">
+
 
     <!--barra di navigazione-->
     <nav>
@@ -35,22 +39,25 @@
     </nav>
       
     </header>
-	
-	<!--footer della pagina-->
-    <footer th:fragment="fondo">
-        <div id="containerFooter">
 
-            <div>via da qua 24, Roma, Italia</div>
+		<!--<nav id="navbar">
+     		<div id="titoloCircolo" class="elementoNav">CIRCOLO FUTSAL FUJI</div>
+      		<ul id="menu" class="elementoNav">
+        		<li class="nav_link"><a th:href="@{/}">Home</a></li>
+        		<li class="nav_link"><a th:href="@{/campi}">Campi</a></li>
+        		<li class="nav_link"><a>Chi siamo</a></li>
+      		</ul>
+    	</nav>
+	</header>-->
 
-            <div class="divisorio">|</div>
-
-            <div>davidmolitiern@hotmail.it</div>
-
-            <div class="divisorio">|</div>
-
-            <div>+39 391 1239876</div>  
-
-        </div>
-    </footer>
+	<footer th:fragment="fondo" th:object="${circolo}">
+		<div >Via evodia 11, Roma</div>
+		<div class="separatore"></div>
+		<div >+06 58765543</div>
+		<div class="separatore"></div>
+		<div >futsalfuji@gmail.com</div>
+		<div class="separatore"></div>
+		<a th:href="@{/login}">Clicca per passare al gestore</a>
+	</footer>
 </body>
 </html>

@@ -30,8 +30,4 @@ public class Gestore {
 	@NonNull
 	private String email;
 	
-	@Column(nullable = false)
-	@NonNull
-	private String password;
-	
 }
