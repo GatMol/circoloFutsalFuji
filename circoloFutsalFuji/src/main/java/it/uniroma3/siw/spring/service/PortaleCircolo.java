@@ -32,7 +32,7 @@ public class PortaleCircolo {
 		this.utenteCorrente = this.prenotazioneCorrente.creaEAggiungiUtente(nome,cognome,email,telefono);
 		this.prenotazioneCorrente.setData(data);
 		this.prenotazioneCorrente.setOrarioInizio(orarioInizio);
-		this.prenotazioneCorrente.setOrarioFIne(orarioFine);
+		this.prenotazioneCorrente.setOrarioFine(orarioFine);
 	}
 	
 	public void confermaPrenotazione() {

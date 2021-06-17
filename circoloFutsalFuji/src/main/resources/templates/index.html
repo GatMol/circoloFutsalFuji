@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="fragments/base.html :: headerfiles(title=#{header.homePage})"></head>
+  <head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.home})"></head>
   <head>
-  <link th:href="@{/css/homePage.css}" rel="stylesheet">
+    <link th:href="@{/css/homePage.css}" rel="stylesheet">
+    <link th:href="@{/css/mediaIndex.css}" rel="stylesheet"/>
   </head>
   <body>
     <!--header della pagina-->
+
+    <header th:replace="fragments/base.html :: intestazione"></header>
+    
+
     <header th:replace="fragments/base.html :: header"></header>
+
     <section>
         <div id="sezioneImmagine">
             <img th:src="@{/images/calcio.png}" />
+
+
+
+                <a th:href="@{/prenotaUnCampo}" href="prenotazione.html" id="prenotaUnCampo">
+
+
                 <a th:href="@{/campi}" id="prenotaUnCampo">
                     PRENOTA UN CAMPO
                 </a>
         </div>
         <div id="sezioneCentrale">
+
+
+             <div th:text="#{messaggioDiBenvenuto}" id="scrittaCentrale">Uno dei migliori centri sportivi di Futsal di Roma sud.</div>
+
+
              <div id="scrittaCentrale">Uno dei migliori centri sportivi di Futsal di Roma sud.</div>
+
          </div>
          <div id="sezioneFinale">
             <div id="sezioneInformazioni">
@@ -23,12 +41,17 @@
                     <img th:src="@{/images/circolo.png}" id="immagineCircolo" src="../static/circolo.png"/>
                 </div>
                 <div class="informazione">
-                    <div id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
+                    <div th:text="#{descrizioneCircolo}" id="descrizione">Il circolo si espande in una delle zone più verdi di Roma sud e presenta una vasta gamma di campi differenti in cui poter giocare.</div>
                 </div>
             </div>
          </div>
     </section>
     <!--footer della pagina-->
+
+    <footer th:replace="fragments/base.html :: fondo"></footer>
+    
+
     <footer th:replace="fragments/base.html :: footer"></footer>
+
   </body>
 </html>

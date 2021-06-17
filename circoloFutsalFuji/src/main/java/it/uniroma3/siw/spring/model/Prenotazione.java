@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Entity
@@ -21,13 +23,14 @@ public @Data class Prenotazione {
 
 
 	@Column(nullable = false)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate data;
 	
 	@Column(nullable = false)
 	private LocalTime orarioInizio;
 	
 	@Column(nullable = false)
-	private LocalTime orarioFIne;
+	private LocalTime orarioFine;
 	
 	@ManyToOne
 	private Utente utente;

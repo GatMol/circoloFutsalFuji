@@ -1,119 +1,144 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="fragments/base.html :: headerfiles(title=#{header.prenotazione})"></head>
+  <head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.prenotazione})"></head>
+  <head>
+      <link th:href="@{/css/prenotazione.css}" rel="stylesheet"/>
+      <link th:href="@{/css/mediaPrenotazione.css}" rel="stylesheet"/>
+  </head>
   <body>
     
     <!--header della pagina-->
-    <header th:replace="fragments/base.html :: header"></header>
+    <header th:replace="fragments/base.html :: intestazione"></header>
     
     <section>
 
-        <form th:action="@{/prenotazione}" method="POST" th:object="${prenotazione}">
+        <form th:action="@{/addPrenotazione}" method="POST">
 
         <!--contenitore informazioni prenotazione-->
-        <div id="contenitorePrenotazione" class="prenotazioneOrizzontale">
+        <div id="contenitorePrenotazione">
 
             <!--contenitore informazioni prenotazione-->
-            <div class="prenotazioneVerticale" class="contenitore">
+            <div class="prenotazioneVerticale contenitore">
                 
                 <!--testo prenotazione-->
-                <div id="titoloPrenotazione" class="infoPrenotazioni">PRENOTA IL CAMPO
+                <div th:text="#{prenotaCampo}" id="titoloPrenotazione" class="infoPrenotazioni">PRENOTA IL CAMPO
                 </div>
 
-                <div id="informazioniPrenotazioni" class="infoPrenotazioni">ti invieremo un email di conferma.
+                <div th:text="#{infoPrenotazioni}" id="informazioniPrenotazioni" class="infoPrenotazioni">ti invieremo un email di conferma.
                     il numero di telefono è necessario per sicurezza</div>
                 <!--informazioni prenotazione-->
-                <div id="riepilogoPrenotazione">
-                    Hai selezionato il campo: 1
-                    <div id="prezzo">Prezzo: 5€</div>
-                    <button type="submit">PRENOTA</button>
-                </div>
+                <div th:text="#{haiSelezionato} + ${campo.id}" id="riepilogoPrenotazione"/>
+                    <div th:text="#{Prezzo} + ${campo.prezzo} + '€'" id="riepilogoPrenotazione">Prezzo: 5€</div>
+                    <button th:text="#{prenota}" type="submit">PRENOTA</button>
+                
 
             </div>
 
             <!--form prenotazione-->
-            <div id="formPrenotazione" class="prenotazioneVerticale" class="contenitore">
+            <div id="formPrenotazione" class="prenotazioneVerticale contenitore">
                 
                 <!--form nome e cognome-->
-                <div id="formNomeCognome" class="prenotazioneOrizzontale" class="elementoForm">
+                <div th:object="${utente}"  id="formNomeCognome" class="elementoForm">
 
                     <div class="elementoNomeCognome">
-                        <div>Nome *</div>
+                        <div th:text="#{nome}">Nome *</div>
                         <div>
-                            <input th:field="*{utente.nome}" class="inputMedio" type="" name="">
+                            <input minlength="2" maxlength="20" th:field="*{nome}" class="inputMedio" type="text"
+                            name="nome"/>
                         </div>
                     </div>
 
-                    <div class="elementoNomeCognome" class="prenotazioneVerticale">
-                        <div>Cognome *</div>
-                        <input th:field="*{utente.cognome}" class="inputMedio" type="" name="">
+                    <div class="elementoNomeCognome prenotazioneVerticale">
+                        <div th:text="#{cognome}">Cognome *</div>
+                        <input minlength="2" maxlength="20" th:field="*{cognome}" class="inputMedio" type="text" name="cognome"/>
                     </div>
 
                 </div>
 
                 <!--form email-->
-                <div class="elementoMailTele" class="prenotazioneOrizzontale">
+                <div th:object="${utente}" class="elementoMailTele">
 
-                    <div  class="elementoForm" class="prenotazioneVerticale">
-                        <div>Email *</div>
-                        <input th:field="*{utente.email}" class="inputLungo" type="" name="">
+                    <div  class="elementoForm prenotazioneVerticale">
+                        <div th:text="#{email}">Email *</div>
+                        <input minlength="3" th:field="*{email}" class="inputLungo" type="email"
+                        name="email"/>
                     </div>
 
                 </div>
 
                 <!--form numero di telefono-->
-                <div class="elementoMailTele" class="prenotazioneOrizzontale">
+                <div th:object="${utente}" class="elementoMailTele">
 
-                    <div class="elementoForm" class="prenotazioneVerticale">
-                        <div>Telefono *</div>
-                        <input th:field="*{utente.telefono}" class="inputLungo" type="" name="">
+                    <div class="elementoForm prenotazioneVerticale">
+                        <div th:text="#{telefono}">Telefono *</div>
+                        <input minlength="10" maxlength="10" 
+                         th:field="*{telefono}" class="inputLungo" type="text"
+                         name="telefono"/>
                     </div>
 
                 </div>
 
                 <!--form data-->
-                <div id="formData" class="prenotazioneVerticale">
+                <div th:object="${prenotazione}" id="formData" class="prenotazioneVerticale">
 
-                    <div id="data" class="prenotazioneOrizzontale">Data</div>
+                    <div th:text="#{data}" id="data">Data *</div>
 
-                    <div class="prenotazioneOrizzontale" class="elementoForm">
-                        <!-- form giorno-->
+                    <div>
+                        <input th:field="*{data}" class="inputMedio"
+                        type="date" value="2021-11-09" name="data"/>
+                    </div>
+                    
+                    
+                    <!--
+                    <div class="prenotazioneOrizzontale elementoForm">
+                       
                         <div class="prenotazioneVerticale">
                             <div>
-                                <input th:field="*{giorno}" class="inputPiccolo" type="" name="">
+                                <input maxlength="2"
+                                 th:field="*{giorno}" class="inputPiccolo" type="numero"
+                                 name="giorno"/>
                                 <div>DD*</div>
                             </div>
                         </div>
 
-                        <!-- form mese-->
-                        <div th:field="*{mese}">
-                            <input class="inputPiccolo" type="" name="">
+                        
+                        <div>
+                            <input maxlength="2" th:field="*{mese}" class="inputPiccolo" type="text"
+                            name="mese"/>
                             <div>MM*</div>
                         </div>
 
-                        <!-- form anno-->
+                        
                         <div>
-                           <input th:field="*{anno}" class="inputPiccolo" type="" name="">
+                           <input maxlength="4"
+                            minlength="4"
+                            th:field="*{anno}" class="inputPiccolo" type="text"
+                            name="anno"/>
                             <div>YYYY*</div>
                         </div>
 
-                    </div>
-
+                    </div>-->
                 </div>
 
                 <!--form orario-->
-                <div class="prenotazioneOrizzontale" class="elementoForm">
+                <div th:object="${prenotazione}" class="prenotazioneOrizzontale elementoForm">
 
                     <!--form ora inizio-->
                     <div class="elementoForm">
-                        <input th:field="*{oraInizio}" class="inputPiccolo" type="" name="">
-                        <div>h inizio*</div>
+                        <input
+                        th:field="*{orarioInizio}" class="inputPiccolo" type="time" step="30"
+                        min="8:00" max="22:00"  
+                        name="hinizio"/>
+                        <div th:text="#{oraI}">h inizio*</div>
                     </div>
 
                     <!--form ora fine-->
                     <div class="elementoForm">
-                        <input th:field="*{oraFine}" class="inputPiccolo" type="" name="">
-                        <div>h fine*</div>
+                        <input
+                         th:field="*{orarioFine}" class="inputPiccolo" type="time" step="30"
+                         min="9:00" max="23:00"
+                         name="hfine"/>
+                        <div th:text="#{oraF}">h fine*</div>
                     </div>
                     
                 </div>
@@ -127,7 +152,7 @@
     </section>
     
     <!--footer della pagina-->
-    <footer th:replace="fragments/base.html :: footer"></footer>
+    <footer th:replace="fragments/base.html :: fondo"></footer>
     
   </body>
 </html>

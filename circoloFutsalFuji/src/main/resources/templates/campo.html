@@ -51,7 +51,7 @@
 						<span th:text="*{tipoTerreno}">sintetico</span>
 					</li>
 				</ul>
-				<form th:action="@{/}" id="prenota">
+				<form th:action="@{/prenota}" id="prenota">
 					<div id="info-prezzo">
 						<span th:text="#{campo.prezzo} + '/h:'">Prezzo/h:</span>
 						<span th:text="*{prezzo} + '€'" id="prezzo">60€</span>	
