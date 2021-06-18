@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.spring.EmailService;
 import it.uniroma3.siw.spring.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.spring.controller.validator.UtenteValidator;
 import it.uniroma3.siw.spring.model.Prenotazione;
@@ -35,7 +37,13 @@ public class PrenotazioneController {
 	private PrenotazioneValidator prenotazioneValidator;
 	
 	@Autowired
+<<<<<<< HEAD
 	private UtenteValidator utenteValidator;
+=======
+	private EmailService emailService;
+	
+	//TODO: Get all'add prenotazione dove creo la prenotazione
+>>>>>>> 7badfbde597ca0d23bd1115245341ac9052c6111
 	
 	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
@@ -52,6 +60,18 @@ public class PrenotazioneController {
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validate(utente, bindingResult);
 		if(!bindingResult.hasErrors()) {
+<<<<<<< HEAD
+=======
+			prenotazione.setUtente(utente);
+			prenotazioneService.inserisci(prenotazione);
+			String email = utente.getEmail().trim();
+			String codice = prenotazione.getCodice();
+			emailService.sendSimpleMessage(email, "Conferma prenotazione", 
+					"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
+			return "campi.html";
+		}
+			logger.debug(campo_id);
+>>>>>>> 7badfbde597ca0d23bd1115245341ac9052c6111
 			if(!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				prenotazione.setUtente(utente);
 				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);
@@ -62,4 +82,12 @@ public class PrenotazioneController {
 		return "prenotazione.html";
 	}
 	
+	@RequestMapping(value = "/confermaPrenotazione/{codice}", method = RequestMethod.GET)
+	public String confermaPrenotazione(Model model, @PathVariable("codice") String codiceConferma) {
+		Prenotazione prenotazione = this.prenotazioneService.prenotazionePerCodice(codiceConferma);
+		prenotazione.setConfermata(true);
+		//TODO: Update della prenotazione nel DB, ora che e' confermata
+		logger.debug("la prenotazione in memoria e' confermata\n Quella nel db? e' confermata: " + this.prenotazioneService.prenotazionePerCodice(codiceConferma).isConfermata());
+		return "index.html"; 
+	}
 }

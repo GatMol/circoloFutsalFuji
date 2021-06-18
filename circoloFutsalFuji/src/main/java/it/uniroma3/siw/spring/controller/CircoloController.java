@@ -5,13 +5,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+<<<<<<< HEAD
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
+=======
+>>>>>>> 7badfbde597ca0d23bd1115245341ac9052c6111
 import it.uniroma3.siw.spring.service.CampoService;
 
 @Controller
@@ -21,7 +23,7 @@ public class CircoloController {
 	
 	@Autowired
 	private CampoService campoService;
-	
+
 	@RequestMapping(value = "/campi", method = RequestMethod.GET)
 	public String getCampi(Model model) {
 		model.addAttribute("campi", this.campoService.tutti());

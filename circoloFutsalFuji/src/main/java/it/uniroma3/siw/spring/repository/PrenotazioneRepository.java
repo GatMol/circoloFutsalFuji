@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -18,5 +19,14 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 			+ "(?4 > p.orario_Inizio AND ?4 < p.orario_Fine))", nativeQuery = true) 
 	public List<Prenotazione> findPrenotazione(Long campo_id, LocalDate data, LocalTime oraInizio,
 												LocalTime oraFine);
+
+	public Prenotazione findByCodice(String codiceConferma);
+	
+	@Modifying
+	@Query(value = 
+			"DELETE FROM prenotazione p "
+			+ "WHERE p.confermata=false and p.data_Di_Creazione < (LOCALTIMESTAMP - interval '30 minutes')", 
+			nativeQuery = true)
+	public void deleteAfter30Minutes();
 
 }

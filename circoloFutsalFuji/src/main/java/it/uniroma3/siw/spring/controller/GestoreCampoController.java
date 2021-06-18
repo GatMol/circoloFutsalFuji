@@ -2,6 +2,8 @@ package it.uniroma3.siw.spring.controller;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,9 @@ public class GestoreCampoController {
 
 	@Autowired
 	private CampoValidator campoValidator;
-
+	
+	private static final Logger logger = LogManager.getLogger(GestoreCampoController.class);
+	
 	@RequestMapping(value = "/admin/aggiungiCampo", method = RequestMethod.GET)
 	public String newCampo(Model model) {
 		model.addAttribute("campo", new Campo());
@@ -35,9 +39,10 @@ public class GestoreCampoController {
 	}
 
 	@RequestMapping(value = "/admin/aggiungiCampo", method = RequestMethod.POST)
-	public String salvaCampo(@ModelAttribute(name = "campo") Campo campo, Model model,
+	public String salvaCampo(Model model, @ModelAttribute("campo") Campo campo, 
 			@RequestParam("image1") MultipartFile multipartFile1, @RequestParam("image2") MultipartFile multipartFile2,
 			BindingResult campoBindingResult){
+		logger.debug("Ecco il contenuto del model" + model);
 
 		String fileName1 = StringUtils.cleanPath(multipartFile1.getOriginalFilename());
 		String fileName2 = StringUtils.cleanPath(multipartFile2.getOriginalFilename());
@@ -45,12 +50,12 @@ public class GestoreCampoController {
 		campo.setImg1(fileName1);
 		campo.setImg2(fileName2);
 
+		logger.debug("il campo nel model " + campo.toString());
 		campoValidator.validate(campo, campoBindingResult);
 
 		if (!campoBindingResult.hasErrors()) {
 
 			Campo savedCampo = this.campoService.inserisci(campo);
-
 			String uploadDir = "campo-photos/" + savedCampo.getId();
 
 			try {

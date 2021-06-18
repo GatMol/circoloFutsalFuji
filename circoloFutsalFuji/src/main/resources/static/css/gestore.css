@@ -1,0 +1,7 @@
+section ul {
+	font-size: calc(1rem + 0.5vw);
+}
+
+section li {
+	margin-bottom: 20px;
+}

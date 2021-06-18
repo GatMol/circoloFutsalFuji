@@ -56,6 +56,9 @@
 
 /* BottoneInformati */
 .bottone-info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
     position: relative;
 	color: ForestGreen;
 	border: 2px solid ForestGreen;
