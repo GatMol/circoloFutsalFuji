@@ -15,12 +15,20 @@
 						<div class="info-campo">
 							<div class="top-box" th:text="#{campo} + ${campo.id}">Campo 1</div>
 							<div class="prezzo"><span th:text="#{campo.prezzo} + '/h:'">Prezzo/h:</span><span th:text="${campo.prezzo} + 'euro'">50euro</span></div>
+							<div class="bottoni">
 							<a class="bottone-info" 
 								th:text="#{piuInfo}" 
 								th:href="@{'/campo' + '/' + ${campo.id}}"
 								>
 								Informazioni
 							</a>
+							<a sec:authorize="hasAuthority('ADMIN')" class="bottone-info bottone-rimuovi" 
+								th:text="#{campi.rimuoviCampo}" 
+								th:href="@{'/admin/rimuoviCampo/' + ${campo.id}}"
+								>
+								Rimuovi
+							</a>
+							</div>
 						</div>
 						<img class="img-campo" th:src="@{${campo.photoImage1Path}}" alt=""></img>
 					</div>

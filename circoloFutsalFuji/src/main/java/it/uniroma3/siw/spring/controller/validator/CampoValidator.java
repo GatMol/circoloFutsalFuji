@@ -52,8 +52,7 @@ public class CampoValidator implements Validator {
 
 		if (!errors.hasFieldErrors("tipoCampo")) {
 			String tipoCampo = campo.getTipoCampo().trim();
-			if (!tipoCampo.equals("outdoor") && !tipoCampo.equals("Outdoor") && !tipoCampo.equals("indoor")
-					&& !tipoCampo.equals("Indoor"))
+			if (!tipoCampo.equals("Outdoor") && !tipoCampo.equals("Indoor"))
 				errors.rejectValue("tipoCampo", "invalid");
 		}
 

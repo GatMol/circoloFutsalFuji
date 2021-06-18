@@ -25,8 +25,7 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 	@Modifying
 	@Query(value = 
 			"DELETE FROM prenotazione p "
-			+ "WHERE p.confermata=false and p.data_Di_Creazione < (LOCALTIMESTAMP - interval '30 minutes')", 
+			+ "WHERE p.confermata=false and p.data_Di_Creazione < (LOCALTIMESTAMP - interval '10 minutes')", 
 			nativeQuery = true)
-	public void deleteAfter30Minutes();
-
+	public void deleteAfter10Minutes();
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/base.html :: headerfiles(#{pageTitle.prenotazioni})"></head>
+<head></head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<head>
+<link th:href="@{/css/prenotazioni.css}" type="text/css" rel="stylesheet"/>
+</head>
+<section>
+<table>
+	 <thead>
+        <tr>
+            <th colspan="8">PRENOTAZIONI</th>
+        </tr>
+    </thead>
+	<tr>
+		<th>Id</th>
+		<th>Data</th>
+		<th>Inizio partita</th>
+		<th>Fine partita</th>
+		<th>Conferma prenotazione</th>
+		<th>Prenotato alle</th>
+		<th>Email</th>
+		<th>Telefono</th>
+	</tr>
+	<tr th:each="prenotazione : ${prenotazioni}">
+		<td th:text="${prenotazione.id}">id</td>
+		<td th:text="${prenotazione.data}">data</td>
+		<td th:text="${prenotazione.orarioInizio}">orarioInizio</td>
+		<td th:text="${prenotazione.orarioFine}">orarioFine</td>
+		<td th:text="${prenotazione.confermata}">confermata</td>
+		<td th:text="${prenotazione.dataDiCreazione}">dataDiCreazione</td>
+		<td th:text="${prenotazione.utente.email}">email</td>
+		<td th:text="${prenotazione.utente.telefono}">telefono</td>
+	</tr>
+</table>
+</section>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

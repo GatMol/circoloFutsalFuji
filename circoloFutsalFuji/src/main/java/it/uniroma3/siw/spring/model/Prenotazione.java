@@ -43,7 +43,6 @@ public @Data class Prenotazione {
 	@Column(nullable = false)
 	private LocalDateTime dataDiCreazione;
 	
-	@ManyToOne
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Utente utente;
 	
@@ -56,7 +55,6 @@ public @Data class Prenotazione {
 	public Prenotazione() {
 		this(LocalDateTime.now());
 	}
-	
 	
 	public Prenotazione(LocalDate data, LocalTime orarioInizio, LocalTime orarioFine,
 			LocalDateTime dataDiCreazione) {

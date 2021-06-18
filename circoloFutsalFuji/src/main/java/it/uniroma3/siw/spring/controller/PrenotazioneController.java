@@ -38,7 +38,22 @@ public class PrenotazioneController {
 	@Autowired
 	private EmailService emailService;
 	
-	//TODO: Get all'add prenotazione dove creo la prenotazione
+	@RequestMapping(value = "/prenotaUnCampo", method = RequestMethod.GET)
+	public String iniziaPrenotazione(Model model) {
+		model.addAttribute("campi", this.campoService.tutti());
+		return "campi.html";
+	}
+	
+	@RequestMapping(value ="/prenota", method = RequestMethod.GET)
+	public String prenotaCampo(@ModelAttribute("campo_id") Long campo_id, Model model) {
+		logger.debug(campo_id);
+		model.addAttribute("campo_id", campo_id);
+		model.addAttribute("campo", campoService.campoPerId(campo_id));
+		model.addAttribute("prenotazione", new Prenotazione());
+		model.addAttribute("utente", new Utente());
+		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
+		return "prenotazione.html";
+	}
 	
 	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
@@ -54,19 +69,14 @@ public class PrenotazioneController {
 		
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			prenotazione.setUtente(utente);
-			prenotazioneService.inserisci(prenotazione);
-			String email = utente.getEmail().trim();
-			String codice = prenotazione.getCodice();
-			emailService.sendSimpleMessage(email, "Conferma prenotazione", 
-					"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
-			return "campi.html";
-		}
-			logger.debug(campo_id);
 			if(!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				prenotazione.setUtente(utente);
 				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);
 				prenotazioneService.inserisci(prenotazione);
+				String email = utente.getEmail().trim();
+				String codice = prenotazione.getCodice();
+				emailService.sendSimpleMessage(email, "Conferma prenotazione", 
+						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
 				return "campi.html";
 			}
 		}
