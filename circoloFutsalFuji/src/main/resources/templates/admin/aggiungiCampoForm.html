@@ -11,8 +11,7 @@
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<section>
 	<h1>AGGIUNGI CAMPO</h1>
-	<form th:action="@{/admin/aggiungiCampo}" method="POST" enctype="multipart/form-data" th:object="${campo}"}>
-		<!--Per dire al browser che è una form che contiene un file upload-->
+	<form th:action="@{/admin/aggiungiCampo}" method="POST" enctype="multipart/form-data" th:object="${campo}">
 		<div id="form">
 			<div class="container-field">
 				<span>
@@ -21,7 +20,7 @@
 					</div>
 					<input type="number" min="25" max="42" th:field="*{lunghezza}"/>
 				</span>
-				<span th:if="${#fields.hasErrors('lunghezza')}" 
+				<span class="errori" th:if="${#fields.hasErrors('lunghezza')}" 
                 	th:errors="*{lunghezza}" th:style="'color:red'">
                 </span>
 			</div>
@@ -32,7 +31,7 @@
                 	</div>
                 	<input type="number" min="15" max="25" th:field="*{larghezza}"/>
                 </span>
-                <span th:if="${#fields.hasErrors('larghezza')}" 
+                <span class="errori" th:if="${#fields.hasErrors('larghezza')}" 
                 	th:errors="*{larghezza}" th:style="'color:red'">
                 </span>
 			</div>
@@ -42,7 +41,7 @@
                 	Tipo Campo
                 	</div>
                 	<div>
-                		<input class="radio" id="outdoor" type="radio" name="tipoCampo" value="outdoor" th:field="*{tipoCampo}" required/>
+                		<input class="radio" id="outdoor" type="radio" name="tipoCampo" value="outdoor" th:field="*{tipoCampo}"/>
                 		<label for="outdoor">Outdoor</label>
                 	</div>
                 	<div>
@@ -50,7 +49,7 @@
                 		<label for="indoor">Indoor</label>
                 	</div>
                	</span>
-               	<span th:if="${#fields.hasErrors('tipoCampo')}" 
+               	<span class="errori" th:if="${#fields.hasErrors('tipoCampo')}" 
                		th:errors="*{tipoCampo}" th:style="'color:red'">
                	</span>
 			</div>
@@ -59,7 +58,7 @@
                 	<div class="name-field" th:text="#{campo.tipoTerreno}">
                 	Tipo terreno
                 	</div>
-                	<select type="text"  th:field="*{tipoTerreno}" required>
+                	<select type="text"  th:field="*{tipoTerreno}">
                 		<optgroup label="Outdoor Sintetico">
                 		<option value="sintetico" th:text="#{campo.tipoTerreno.sintetico1}" selected>Sintetico prima gen.</option>
                 		<option value="sintetico" th:text="#{campo.tipoTerreno.sintetico2}">Sintetico seconda gen.</option>
@@ -73,7 +72,7 @@
                 		</optgroup>
                 	</select>
                 </span>
-                <span th:if="${#fields.hasErrors('tipoTerreno')}" 
+                <span class="errori" th:if="${#fields.hasErrors('tipoTerreno')}" 
                 	th:errors="*{tipoTerreno}" th:style="'color:red'">
                 </span>
             </div>
@@ -84,7 +83,7 @@
                 	</div>
                 	<input type="number" min="0" th:field="*{prezzo}"/>
                 </span>
-                <span th:if="${#fields.hasErrors('prezzo')}" 
+                <span class="errori" th:if="${#fields.hasErrors('prezzo')}" 
                 	th:errors="*{prezzo}" th:style="'color:red'">
                 </span>
              </div>
@@ -92,9 +91,9 @@
 		<div id="right-form">
         	<h3>Aggiungi due immagini del campo</h3>
         	<input class="right-form-item" type="file" name="image1" accept="image/png, image/jpeg"/>
-        	<div th:if="${#fields.hasErrors('img1')}" th:errors="*{img1}" th:style="'color:red'"></div>
+        	<div class="errori" th:if="${#fields.hasErrors('img1')}" th:errors="*{img1}" th:style="'color:red'"></div>
             <input class="right-form-item" type="file" name="image2" accept="image/png, image/jpeg"/>
-            <div th:if="${#fields.hasErrors('img2')}" th:errors="*{img2}" th:style="'color:red'"></div>
+            <div class="errori" th:if="${#fields.hasErrors('img2')}" th:errors="*{img2}" th:style="'color:red'"></div>
             <button type="submit">Salva</button>
         </div>
    		</form>

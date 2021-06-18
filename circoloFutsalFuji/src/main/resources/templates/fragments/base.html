@@ -1,63 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles(title)">
-	<meta charset="UTF-8" />
-    <link th:href="@{/css/navbar.css}" rel="stylesheet"/>
-    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
-    <link th:href="@{/css/root.css}" rel="stylesheet"/>
-    <link th:href="@{/css/mediaNavBar.css}" rel="stylesheet"/>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link th:href="@{/css/navbar.css}" rel="stylesheet">
 	<link th:href="@{/css/globalStyle.css}" rel="stylesheet">
-	<link th:href="@{/css/mediaNavbar.css}" rel="stylesheet">
+	<link th:href="@{/css/navbar741.css}" rel="stylesheet">
 	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
 	<link th:href="@{https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@300;700&display=swap}" rel="stylesheet"> 
 	<link th:href="@{https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap}" rel="stylesheet"> 
 	<title th:text="${title}"></title>
 </head>
 <body>
-	
 	<header th:fragment="intestazione">
-
-
-    <!--barra di navigazione-->
-    <nav>
-        
-        <!-- nome circolo-->
-        <div id ="titolo" class="elementoNavBar">Futsal Fuji</div>
-
-        <!-- barra di navigazione-->
-        <div id="menu" class="elementoNavBar">
-
-            <a th:href="@{/home}" href="index.html" class="elementoMenu">Home</a>
-            <a th:href="@{/campi}" href="campi.html" class="elementoMenu">Campi</a>
-            <a th:href="@{/home}" href="index.html" class="elementoMenu">Chi siamo</a>
-
-        </div>
-         
-    </nav>
-      
-    </header>
-
-		<!--<nav id="navbar">
+		<nav id="navbar">
      		<div id="titoloCircolo" class="elementoNav">CIRCOLO FUTSAL FUJI</div>
       		<ul id="menu" class="elementoNav">
         		<li class="nav_link"><a th:href="@{/}">Home</a></li>
-        		<li class="nav_link"><a th:href="@{/campi}">Campi</a></li>
-        		<li class="nav_link"><a>Chi siamo</a></li>
+        		<li class="nav_link" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/default}" th:text="#{gestisci}">Gestisci</a></li>
+        		<li class="nav_link"><a th:href="@{/campi}" th:text="#{campi}">Campi</a></li>
+        		<li class="nav_link"><a href="footer" th:text="#{chisiamo}">Chi siamo</a></li>
       		</ul>
     	</nav>
-	</header>-->
-
-	<footer th:fragment="fondo" th:object="${circolo}">
+	</header>
+	<footer id="footer" th:fragment="fondo" th:object="${circolo}">
 		<div >Via evodia 11, Roma</div>
 		<div class="separatore"></div>
 		<div >+06 58765543</div>
 		<div class="separatore"></div>
 		<div >futsalfuji@gmail.com</div>
 		<div class="separatore"></div>
-		<a th:href="@{/login}">Clicca per passare al gestore</a>
+		<a th:href="@{/login}" th:text="#{gestore.login}">Login gestore</a>
+		<div class="separatore"></div>
+		<a th:href="@{/logout}" sec:authorize="hasAuthority('ADMIN')">Logout</a>
 	</footer>
 </body>
 </html>

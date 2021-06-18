@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.gestore})"></head>
+<head>
+<link type="text/css" rel="stylesheet" th:href="@{/css/gestore.css}"/>
+</head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<section>
-		<div><a th:href="@{/admin/aggiungiCampo}">clicca per creare un campo</a></div>
-		<div><a th:href="@{/admin/rimuoviCampo}">clicca per rimuovere un campo</a></div>
+	<ul>
+		<li><a th:href="@{/admin/aggiungiCampo}" th:text="#{inserisciCampo}">Inserisci un campo</a></li>
+		<li><a th:href="@{/admin/rimuoviCampo}" th:text="#{rimuoviCampo}">Rimuovi un campo</a></li>
+	</ul>
 	</section>
 	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>

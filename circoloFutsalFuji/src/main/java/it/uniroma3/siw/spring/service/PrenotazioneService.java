@@ -34,4 +34,14 @@ public class PrenotazioneService {
 		else 
 			return false;
 	}
+
+	@Transactional
+	public Prenotazione prenotazionePerCodice(String codiceConferma) {
+		return this.prenotazioneRepository.findByCodice(codiceConferma);
+	}
+	
+	@Transactional
+	public void rimuoviPrenotazioniNonConfermate() {
+		this.prenotazioneRepository.deleteAfter30Minutes();
+	}
 }
