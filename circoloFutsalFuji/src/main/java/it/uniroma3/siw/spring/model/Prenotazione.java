@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,6 +44,7 @@ public @Data class Prenotazione {
 	private LocalDateTime dataDiCreazione;
 	
 	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Utente utente;
 	
 	public Prenotazione(LocalDateTime dataDiCreazione) {

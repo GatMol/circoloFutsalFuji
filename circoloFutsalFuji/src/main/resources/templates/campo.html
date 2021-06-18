@@ -52,6 +52,7 @@
 					</li>
 				</ul>
 				<form th:action="@{/prenota}" id="prenota">
+					<input type="text" style="display: none;" name="campo_id" th:value="${campo.id}"></input>
 					<div id="info-prezzo">
 						<span th:text="#{campo.prezzo} + '/h:'">Prezzo/h:</span>
 						<span th:text="*{prezzo} + '€'" id="prezzo">60€</span>	
