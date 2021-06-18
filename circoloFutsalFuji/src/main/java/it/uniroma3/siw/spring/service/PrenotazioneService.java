@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.spring.model.Campo;
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.repository.PrenotazioneRepository;
 
@@ -27,11 +28,13 @@ public class PrenotazioneService {
 	}
 	
 	@Transactional
-	public boolean alreadyExists(Prenotazione prenotazione) {
-		List<Prenotazione> prenotazioni = prenotazioneRepository.findPrenotazione(prenotazione);
+	public boolean alreadyExists(Long campo_id, Prenotazione prenotazione) {
+		List<Prenotazione> prenotazioni = prenotazioneRepository.findPrenotazione(campo_id, prenotazione.getData(),
+																				  prenotazione.getOrarioInizio(), prenotazione.getOrarioFine());
 		if (prenotazioni.size() > 0)
 			return true;
 		else 
 			return false;
 	}
+	
 }

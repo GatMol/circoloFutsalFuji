@@ -3,6 +3,7 @@ package it.uniroma3.siw.spring.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,6 @@ public @Data class Prenotazione {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-
 	@Column(nullable = false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate data;
@@ -32,7 +32,7 @@ public @Data class Prenotazione {
 	@Column(nullable = false)
 	private LocalTime orarioFine;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Utente utente;
 
 	public Utente creaEAggiungiUtente(String nome, String cognome, String email, String telefono) {

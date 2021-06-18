@@ -14,6 +14,8 @@
 
         <form th:action="@{/addPrenotazione}" method="POST">
 
+            <input type="text" style="display: none;" name="campo_id" th:value="${campo.id}"></input>
+
         <!--contenitore informazioni prenotazione-->
         <div id="contenitorePrenotazione">
 
@@ -126,7 +128,7 @@
                     <!--form ora inizio-->
                     <div class="elementoForm">
                         <input
-                        th:field="*{orarioInizio}" class="inputPiccolo" type="time" step="30"
+                        class="inputPiccolo" type="time" step="30"
                         min="8:00" max="22:00"  
                         name="hinizio"/>
                         <div th:text="#{oraI}">h inizio*</div>
@@ -135,7 +137,7 @@
                     <!--form ora fine-->
                     <div class="elementoForm">
                         <input
-                         th:field="*{orarioFine}" class="inputPiccolo" type="time" step="30"
+                         class="inputPiccolo" type="time" step="30"
                          min="9:00" max="23:00"
                          name="hfine"/>
                         <div th:text="#{oraF}">h fine*</div>

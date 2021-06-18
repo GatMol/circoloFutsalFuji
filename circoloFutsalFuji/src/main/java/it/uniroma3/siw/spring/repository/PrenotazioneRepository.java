@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -9,11 +11,12 @@ import it.uniroma3.siw.spring.model.Prenotazione;
 
 public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Long>{
 
-	@Query(value="SELECT p "
+	@Query(value="SELECT * "
 			+ "FROM prenotazione p "
-			+ "WHERE p.campo_id = ?.campo.id AND p.data = ?.data "
-			+ "AND ((?.oraInizio > p.oraInizio AND ?.oraInizio < p.oraFine) OR "
-			+ "(?.oraFine > p.oraInizio AND ?.oraFine < p.oraFine))", nativeQuery = true) 
-	public List<Prenotazione> findPrenotazione(Prenotazione prenotazione);
+			+ "WHERE p.campo_id = ?1 AND p.data = ?2 "
+			+ "AND ((?3 > p.orario_Inizio AND ?3 < p.orario_Fine) OR "
+			+ "(?4 > p.orario_Inizio AND ?4 < p.orario_Fine))", nativeQuery = true) 
+	public List<Prenotazione> findPrenotazione(Long campo_id, LocalDate data, LocalTime oraInizio,
+												LocalTime oraFine);
 
 }
