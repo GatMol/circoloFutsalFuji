@@ -43,6 +43,6 @@ public class PrenotazioneService {
 	
 	@Transactional
 	public void rimuoviPrenotazioniNonConfermate() {
-		this.prenotazioneRepository.deleteAfter30Minutes();
+		this.prenotazioneRepository.deleteAfter10Minutes();
 	}
 }

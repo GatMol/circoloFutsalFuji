@@ -21,67 +21,84 @@ import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
 import it.uniroma3.siw.spring.service.PrenotazioneService;
+import it.uniroma3.siw.spring.util.EmailValidator;
 
 @Controller
 public class PrenotazioneController {
-	
+
 	private static final Logger logger = LogManager.getLogger(PrenotazioneController.class);
-	
+
 	@Autowired
 	private PrenotazioneService prenotazioneService;
-	
+
 	@Autowired
 	private CampoService campoService;
-	
+
 	@Autowired
 	private PrenotazioneValidator prenotazioneValidator;
 	
 	@Autowired
-<<<<<<< HEAD
-	private UtenteValidator utenteValidator;
-=======
 	private EmailService emailService;
-	
-	//TODO: Get all'add prenotazione dove creo la prenotazione
->>>>>>> 7badfbde597ca0d23bd1115245341ac9052c6111
-	
+
+	// TODO: Get all'add prenotazione dove creo la prenotazione
+
 	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
-								  @ModelAttribute("campo_id") Long campo_id,
-								  @ModelAttribute("hinizio") String hinizio,
-								  @ModelAttribute("hfine") String hfine,
-								  @ModelAttribute("prenotazione") Prenotazione prenotazione,
-										Model model, BindingResult bindingResult) {
-		
+			@ModelAttribute("campo_id") Long campo_id,
+			@ModelAttribute("hinizio") String hinizio,
+			@ModelAttribute("hfine") String hfine,
+			@ModelAttribute("prenotazione") Prenotazione prenotazione,
+			Model model, BindingResult bindingResult) {
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		prenotazione.setOrarioInizio(LocalTime.parse(hinizio, formatter));
 		prenotazione.setOrarioFine(LocalTime.parse(hfine, formatter));
-		
+
 		prenotazioneValidator.validate(prenotazione, bindingResult);
-		utenteValidator.validate(utente, bindingResult);
+		this.valida(utente, bindingResult);
+		logger.debug(bindingResult.toString());
 		if(!bindingResult.hasErrors()) {
-<<<<<<< HEAD
-=======
-			prenotazione.setUtente(utente);
-			prenotazioneService.inserisci(prenotazione);
-			String email = utente.getEmail().trim();
-			String codice = prenotazione.getCodice();
-			emailService.sendSimpleMessage(email, "Conferma prenotazione", 
-					"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
-			return "campi.html";
-		}
-			logger.debug(campo_id);
->>>>>>> 7badfbde597ca0d23bd1115245341ac9052c6111
+
 			if(!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				prenotazione.setUtente(utente);
 				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);
 				prenotazioneService.inserisci(prenotazione);
+				String email = utente.getEmail().trim();
+				String codice = prenotazione.getCodice();
+				emailService.sendSimpleMessage(email, "Conferma prenotazione", 
+						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
 				return "campi.html";
 			}
+
 		}
-		return "prenotazione.html";
+		model.addAttribute("campo_id", campo_id);
+		model.addAttribute("campo", campoService.campoPerId(campo_id));
+		return"prenotazione.html";
+
 	}
 	
+	private void valida(Utente u, BindingResult errors) {
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "required");
+		
+		Utente utente = (Utente) u;
+		
+		if(!EmailValidator.isValidEmailAddress(utente.getEmail()))
+			errors.reject("email.nonvalida");
+		
+		if(utente.getTelefono().length()!=10) {
+			errors.reject("telefono.nonvalido");
+		}else {
+			try {
+				Long.parseLong(utente.getTelefono());
+			}catch(NumberFormatException e) {
+				errors.reject("telefono.nonnumerico");
+			}
+		}
+	}
+
 	@RequestMapping(value = "/confermaPrenotazione/{codice}", method = RequestMethod.GET)
 	public String confermaPrenotazione(Model model, @PathVariable("codice") String codiceConferma) {
 		Prenotazione prenotazione = this.prenotazioneService.prenotazionePerCodice(codiceConferma);

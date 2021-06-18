@@ -24,7 +24,7 @@
                     il numero di telefono è necessario per sicurezza</div>
                 <!--informazioni prenotazione-->
                 <div th:text="#{haiSelezionato} + ${campo.id}" id="riepilogoPrenotazione"/>
-                    <div th:text="#{Prezzo} + ${campo.prezzo} + '€'" id="riepilogoPrenotazione">Prezzo: 5€</div>
+                    <div th:text="#{prezzo} + ': ' + ${campo.prezzo} + '€'" id="riepilogoPrenotazione">Prezzo: 5€</div>
                     <button th:text="#{prenota}" type="submit">PRENOTA</button>
             </div>
             <!--form prenotazione-->

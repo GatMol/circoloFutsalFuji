@@ -1,25 +1,23 @@
 package it.uniroma3.siw.spring.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-<<<<<<< HEAD
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
-=======
->>>>>>> 7badfbde597ca0d23bd1115245341ac9052c6111
 import it.uniroma3.siw.spring.service.CampoService;
+import it.uniroma3.siw.spring.service.PrenotazioneService;
 
 @Controller
 public class CircoloController {
 	
-	private static final Logger logger = LogManager.getLogger(CircoloController.class);
+	@Autowired
+	private PrenotazioneService prenotazioneService;
 	
 	@Autowired
 	private CampoService campoService;
@@ -59,11 +57,11 @@ public class CircoloController {
 	
 	@RequestMapping(value ="/prenota", method = RequestMethod.GET)
 	public String prenotaCampo(@ModelAttribute("campo_id") Long campo_id, Model model) {
-		logger.debug(campo_id);
 		model.addAttribute("campo_id", campo_id);
 		model.addAttribute("campo", campoService.campoPerId(campo_id));
 		model.addAttribute("prenotazione", new Prenotazione());
 		model.addAttribute("utente", new Utente());
+		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
 		return "prenotazione.html";
 	}
 }
