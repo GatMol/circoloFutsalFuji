@@ -30,10 +30,7 @@ public class PrenotazioneService {
 	public boolean alreadyExists(Long campo_id, Prenotazione prenotazione) {
 		List<Prenotazione> prenotazioni = prenotazioneRepository.findPrenotazione(campo_id, prenotazione.getData(),
 																				  prenotazione.getOrarioInizio(), prenotazione.getOrarioFine());
-		if (prenotazioni.size() > 0)
-			return true;
-		else 
-			return false;
+		return prenotazioni.size() > 0;
 	}
 
 	@Transactional

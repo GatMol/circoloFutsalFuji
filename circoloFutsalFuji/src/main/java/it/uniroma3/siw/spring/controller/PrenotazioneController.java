@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.EmailService;
 import it.uniroma3.siw.spring.controller.validator.PrenotazioneValidator;
-import it.uniroma3.siw.spring.controller.validator.UtenteValidator;
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
@@ -68,6 +67,8 @@ public class PrenotazioneController {
 				emailService.sendSimpleMessage(email, "Conferma prenotazione", 
 						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
 				return "campi.html";
+			}else {
+				bindingResult.reject("duplicato");
 			}
 
 		}
