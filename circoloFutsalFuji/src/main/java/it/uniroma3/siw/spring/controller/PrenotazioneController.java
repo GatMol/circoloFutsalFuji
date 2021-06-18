@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.controller.validator.PrenotazioneValidator;
+import it.uniroma3.siw.spring.controller.validator.UtenteValidator;
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
@@ -33,6 +34,9 @@ public class PrenotazioneController {
 	@Autowired
 	private PrenotazioneValidator prenotazioneValidator;
 	
+	@Autowired
+	private UtenteValidator utenteValidator;
+	
 	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
 								  @ModelAttribute("campo_id") Long campo_id,
@@ -46,8 +50,8 @@ public class PrenotazioneController {
 		prenotazione.setOrarioFine(LocalTime.parse(hfine, formatter));
 		
 		prenotazioneValidator.validate(prenotazione, bindingResult);
+		utenteValidator.validate(utente, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			logger.debug(campo_id);
 			if(!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				prenotazione.setUtente(utente);
 				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);

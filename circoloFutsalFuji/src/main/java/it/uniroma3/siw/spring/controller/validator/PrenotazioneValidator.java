@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller.validator;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -15,6 +17,10 @@ public class PrenotazioneValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "data", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orarioInizio", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orarioFine", "required");
+		
+		Prenotazione prenotazione = (Prenotazione) o;
+		if(prenotazione.getData().isBefore(LocalDate.now()))
+			errors.reject("data.passata");
 	}
 
 	@Override
