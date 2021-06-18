@@ -70,11 +70,13 @@ img{
 }
 
 #descrizione{
-	width: 55%;
+	width: 45%;
 	border-radius: 10%;
-	background-color: grey;
+	background-color: white;
+	opacity: 80%;
+	color: black;
 	position: absolute;
-	right: 0%;
+	right: 10%;
 	top: 10%;
 	height: 80%;
 	display: flex;

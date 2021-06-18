@@ -9,7 +9,7 @@
     <!--header della pagina-->
     <header th:replace="fragments/base.html :: intestazione"></header>
     <section>
-        <form th:action="@{/addPrenotazione}" method="POST">
+        <form th:object="${prenotazione}" th:action="@{/addPrenotazione}" method="POST">
 
             <input type="text" style="display: none;" name="campo_id" th:value="${campo.id}"></input>
 
@@ -47,7 +47,7 @@
                 <div th:object="${utente}" class="elementoMailTele">
                     <div  class="elementoForm prenotazioneVerticale">
                         <div th:text="#{email}">Email *</div>
-                        <input minlength="3" th:field="*{email}" class="inputLungo" type="email"
+                        <input minlength="3" th:field="*{email}" class="inputLungo" type="text"
                         name="email"/>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <div th:object="${utente}" class="elementoMailTele">
                     <div class="elementoForm prenotazioneVerticale">
                         <div th:text="#{telefono}">Telefono *</div>
-                        <input minlength="10" maxlength="10" 
+                        <input  
                          th:field="*{telefono}" class="inputLungo" type="text"
                          name="telefono"/>
                     </div>
@@ -64,7 +64,7 @@
                 <div th:object="${prenotazione}" id="formData" class="prenotazioneVerticale">
                     <div th:text="#{data}" id="data">Data *</div>
                     <div>
-                        <input th:field="*{data}" class="inputMedio"
+                        <input th:field="*{data}" id="inputdata"
                         type="date" value="2021-11-09" name="data"/>
                     </div>
                     <!--
@@ -95,17 +95,17 @@
                 <!--form orario-->
                 <div th:object="${prenotazione}" class="prenotazioneOrizzontale elementoForm">
                     <!--form ora inizio-->
-                    <div class="elementoForm">
+                    <div id="orainizio" class="elementoForm">
                         <input
-                        class="inputPiccolo" type="time" step="30"
+                        class="inputPiccolo" type="time" step="1800"
                         min="8:00" max="22:00"  
                         name="hinizio"/>
                         <div th:text="#{oraI}">h inizio*</div>
                     </div>
                     <!--form ora fine-->
                     <div class="elementoForm">
-                        <input
-                         class="inputPiccolo" type="time" step="30"
+                        <input 
+                         class="inputPiccolo" type="time" step="1800"
                          min="9:00" max="23:00"
                          name="hfine"/>
                         <div th:text="#{oraF}">h fine*</div>
@@ -113,6 +113,15 @@
                 </div>
             </div>
         </div>
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <div class="errori" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        </div>  
+
+        <div class="errori" th:if="${#fields.hasErrors('data')}" th:errors="*{data}"/>
+        <div class="errori" th:if="${#fields.hasErrors('orarioInizio')}" th:errors="*{orarioInizio}"/>
+        <div class="errori" th:if="${#fields.hasErrors('orarioFine')}" th:errors="*{orarioFine}"/>
+       
     </form>
     </section>
     <footer th:replace="fragments/base.html :: fondo"></footer>

@@ -17,7 +17,7 @@
 }
 
 .contenitore{
-	width: 50%;
+	width: 60%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -28,9 +28,14 @@
 	width: 50%;
 }
 
+#orainizio{
+	margin-right: 40px;
+}
+
 #titoloPrenotazione{
-	font-size: calc(0.5rem + 1vw);
+	font-size: calc(1rem + 1vw);
 	margin-bottom: 3%;
+	font-weight: bold;
 }
 
 #informazioniPrenotazioni{
@@ -50,19 +55,24 @@
 	justify-content: space-between;
 }
 
+#inputdata{
+	width: 50%;
+	height: 25px;
+}
+
 .inputMedio{
 	width: 100%;
-	height: 20px;
+	height: 25px;
 }
 
 .inputLungo{
 	width: 100%;
-	height: 20px;
+	height: 25px;
 }
 
 .inputPiccolo{
-	width: 40%;
-	height: 20px;
+	width: 60%;
+	height: 25px;
 }
 
 .elementoForm{
@@ -71,6 +81,7 @@
 
 #formPrenotazione{
 	font-size: calc(0.4rem + 1vw);
+	width: 40%;
 }
 
 
@@ -78,8 +89,8 @@
 	margin-top: 5%;
 }
 
-#data{
-	margin-bottom: 3%;
+input{
+	font-size: calc(0.5rem + 0.5vw);
 }
 
 button{
@@ -92,4 +103,19 @@ button{
 	font-size: calc(0.3rem + 0.8vw);
 	border-color: black;
 	margin-top: 3%;
+}
+
+
+.errori{
+	margin-top: 12px;
+	background-color: red;
+	border-radius: 15px;
+	color: white;
+	width: 350px;
+	padding: 5px;
+	font-size: calc(0.5rem + 0.6vw);
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
