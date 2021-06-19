@@ -24,12 +24,16 @@ thead {
 }
 
 th, td {
-  padding: 15px 16px;
+  padding: 15px 18px;
 }
 
 tbody tr {
 	border-bottom: 1px solid white;
   	font-size: calc(0.2rem + 1vw);
+}
+
+tbody td:first-of-type {
+	border-right: 1px solid white;
 }
 
 tbody tr:last-of-type {

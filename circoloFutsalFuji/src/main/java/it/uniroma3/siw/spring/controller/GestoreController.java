@@ -75,7 +75,6 @@ public class GestoreController {
 				campoBindingResult.rejectValue("img2", "required");
 				return "admin/aggiungiCampoForm.html";
 			}
-
 			model.addAttribute("campi", this.campoService.tutti());
 			return "campi.html";
 		}
@@ -100,6 +99,7 @@ public class GestoreController {
 	
 	@RequestMapping(value = "/admin/prenotazioni", method = RequestMethod.GET)
 	public String getPrenotazioni(Model model) {
+		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
 		model.addAttribute("prenotazioni", this.prenotazioneService.tutteLePrenotazioni());
 		return "admin/prenotazioni.html";
 	}

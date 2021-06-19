@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.time.LocalDateTime;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +37,17 @@ public class PrenotazioneController {
 
 	@Autowired
 	private EmailService emailService;
-	
+
+	@Autowired
+	private UtenteValidator utenteValidator;
+
 	@RequestMapping(value = "/prenotaUnCampo", method = RequestMethod.GET)
 	public String iniziaPrenotazione(Model model) {
 		model.addAttribute("campi", this.campoService.tutti());
 		return "campi.html";
 	}
-	
-	@RequestMapping(value ="/prenota", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/prenota", method = RequestMethod.GET)
 	public String prenotaCampo(@ModelAttribute("campo_id") Long campo_id, Model model) {
 		logger.debug(campo_id);
 		model.addAttribute("campo_id", campo_id);
@@ -52,48 +57,50 @@ public class PrenotazioneController {
 		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
 		return "prenotazione.html";
 	}
-	
-	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
-	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
-			@ModelAttribute("campo_id") Long campo_id,
-			@ModelAttribute("hinizio") String hinizio,
-			@ModelAttribute("hfine") String hfine,
-			@ModelAttribute("prenotazione") Prenotazione prenotazione,
-			Model model, BindingResult bindingResult) {
+
+	@RequestMapping(value = "/addPrenotazione", method = RequestMethod.POST)
+	public String addPrenotazione(@ModelAttribute("utente") Utente utente, @ModelAttribute("campo_id") Long campo_id,
+			@ModelAttribute("hinizio") String hinizio, @ModelAttribute("hfine") String hfine,
+			@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model, BindingResult bindingResult) {
 
 		prenotazioneValidator.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
 
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validaUtente(utente, bindingResult);
-		if(!bindingResult.hasErrors()) {
+		if (!bindingResult.hasErrors()) {
 
-
-			if(!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
+			if (!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				prenotazione.setUtente(utente);
+				prenotazione.setDataDiCreazione(LocalDateTime.now());
 				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);
 				prenotazioneService.inserisci(prenotazione);
 				String email = utente.getEmail().trim();
 				String codice = prenotazione.getCodice();
-				emailService.sendSimpleMessage(email, "Conferma prenotazione", 
+				emailService.sendSimpleMessage(email, "Conferma prenotazione",
 						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
+				model.addAttribute("campi", this.campoService.tutti());
 				return "campi.html";
-			}else {
+			} else {
 				bindingResult.reject("duplicato");
+				model.addAttribute("campo_id", campo_id);
+				model.addAttribute("campo", campoService.campoPerId(campo_id));
+				return "prenotazione.html";
 			}
-
 		}
 		model.addAttribute("campo_id", campo_id);
 		model.addAttribute("campo", campoService.campoPerId(campo_id));
-		return"prenotazione.html";
-
+		return "prenotazione.html";
 	}
 
 	@RequestMapping(value = "/confermaPrenotazione/{codice}", method = RequestMethod.GET)
 	public String confermaPrenotazione(Model model, @PathVariable("codice") String codiceConferma) {
 		Prenotazione prenotazione = this.prenotazioneService.prenotazionePerCodice(codiceConferma);
-		prenotazione.setConfermata(true);
-		//TODO: Update della prenotazione nel DB, ora che e' confermata
-		logger.debug("la prenotazione in memoria e' confermata\n Quella nel db? e' confermata: " + this.prenotazioneService.prenotazionePerCodice(codiceConferma).isConfermata());
-		return "index.html"; 
+		if(prenotazione==null) {
+			return "erroreConferma.html";
+		}
+		else {
+			prenotazione.setConfermata(true);
+			return "index.html";
+		}
 	}
 }

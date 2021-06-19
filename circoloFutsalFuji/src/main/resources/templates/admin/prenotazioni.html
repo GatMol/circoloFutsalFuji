@@ -12,6 +12,7 @@
 <table id="content">
 	<thead>
 	<tr id="nome-colonne">
+		<th></th>
 		<th>Id</th>
 		<th th:text="#{data}">Data</th>
 		<th th:text="#{inizioPartita}">Inizio partita</th>
@@ -24,6 +25,7 @@
 	</thead>
 	<tbody>
 	<tr th:each="prenotazione : ${prenotazioni}">
+		<td th:text="${prenotazioneStat.count}"></td>
 		<td th:text="${prenotazione.id}">id</td>
 		<td th:text="${prenotazione.data}">data</td>
 		<td th:text="${prenotazione.orarioInizio}">orarioInizio</td>
@@ -35,7 +37,8 @@
 			</div>
 		</td>
 		<td th:text="${prenotazione.dataDiCreazione}">dataDiCreazione</td>
-		<!--<td th:text="${prenotazione.utente.email}">email</td>-->
+		<td th:text="${prenotazione.utente.email}">email</td>
+		<td th:text="${prenotazione.utente.telefono}">telefono</td>
 	</tr>
 	</tbody>
 </table>

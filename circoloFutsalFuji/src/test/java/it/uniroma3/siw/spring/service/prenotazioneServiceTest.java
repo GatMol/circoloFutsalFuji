@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import it.uniroma3.siw.spring.model.Prenotazione;
-import it.uniroma3.siw.spring.service.PrenotazioneService;
 
 @SpringBootTest
 public class prenotazioneServiceTest {
