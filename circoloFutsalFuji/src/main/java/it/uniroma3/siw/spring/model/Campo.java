@@ -1,6 +1,6 @@
 package it.uniroma3.siw.spring.model;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,10 +42,10 @@ public @Data class Campo {
 	
 	@OneToMany
 	@JoinColumn(name = "campo_id")
-	private Map<Long,Prenotazione> prenotazioni;
+	private List<Prenotazione> prenotazioni;
 
 	public void aggiungiPrenotazione(Prenotazione pc) {
-		this.prenotazioni.put(pc.getId(), pc);
+		this.prenotazioni.add(pc);
 	}
 	
 	public String getPhotoImage1Path() {

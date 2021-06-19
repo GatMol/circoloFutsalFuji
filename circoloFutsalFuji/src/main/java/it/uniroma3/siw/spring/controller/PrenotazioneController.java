@@ -1,8 +1,5 @@
 package it.uniroma3.siw.spring.controller;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.EmailService;
 import it.uniroma3.siw.spring.controller.validator.PrenotazioneValidator;
+import it.uniroma3.siw.spring.controller.validator.UtenteValidator;
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
@@ -23,18 +21,18 @@ import it.uniroma3.siw.spring.service.PrenotazioneService;
 
 @Controller
 public class PrenotazioneController {
-	
+
 	private static final Logger logger = LogManager.getLogger(PrenotazioneController.class);
-	
+
 	@Autowired
 	private PrenotazioneService prenotazioneService;
-	
+
 	@Autowired
 	private CampoService campoService;
-	
+
 	@Autowired
 	private PrenotazioneValidator prenotazioneValidator;
-	
+
 	@Autowired
 	private EmailService emailService;
 	
@@ -57,18 +55,19 @@ public class PrenotazioneController {
 	
 	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
-								  @ModelAttribute("campo_id") Long campo_id,
-								  @ModelAttribute("hinizio") String hinizio,
-								  @ModelAttribute("hfine") String hfine,
-								  @ModelAttribute("prenotazione") Prenotazione prenotazione,
-										Model model, BindingResult bindingResult) {
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-		prenotazione.setOrarioInizio(LocalTime.parse(hinizio, formatter));
-		prenotazione.setOrarioFine(LocalTime.parse(hfine, formatter));
-		
+			@ModelAttribute("campo_id") Long campo_id,
+			@ModelAttribute("hinizio") String hinizio,
+			@ModelAttribute("hfine") String hfine,
+			@ModelAttribute("prenotazione") Prenotazione prenotazione,
+			Model model, BindingResult bindingResult) {
+
+		prenotazioneValidator.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
+
 		prenotazioneValidator.validate(prenotazione, bindingResult);
+		utenteValidator.validaUtente(utente, bindingResult);
 		if(!bindingResult.hasErrors()) {
+
+
 			if(!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				prenotazione.setUtente(utente);
 				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);
@@ -78,11 +77,17 @@ public class PrenotazioneController {
 				emailService.sendSimpleMessage(email, "Conferma prenotazione", 
 						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
 				return "campi.html";
+			}else {
+				bindingResult.reject("duplicato");
 			}
+
 		}
-		return "prenotazione.html";
+		model.addAttribute("campo_id", campo_id);
+		model.addAttribute("campo", campoService.campoPerId(campo_id));
+		return"prenotazione.html";
+
 	}
-	
+
 	@RequestMapping(value = "/confermaPrenotazione/{codice}", method = RequestMethod.GET)
 	public String confermaPrenotazione(Model model, @PathVariable("codice") String codiceConferma) {
 		Prenotazione prenotazione = this.prenotazioneService.prenotazionePerCodice(codiceConferma);

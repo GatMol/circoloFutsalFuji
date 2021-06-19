@@ -15,8 +15,8 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 	@Query(value="SELECT * "
 			+ "FROM prenotazione p "
 			+ "WHERE p.campo_id = ?1 AND p.data = ?2 "
-			+ "AND ((?3 > p.orario_Inizio AND ?3 < p.orario_Fine) OR "
-			+ "(?4 > p.orario_Inizio AND ?4 < p.orario_Fine))", nativeQuery = true) 
+			+ "AND ((?3 >= p.orario_Inizio AND ?3 < p.orario_Fine) OR "
+			+ "(?4 > p.orario_Inizio AND ?4 <= p.orario_Fine))", nativeQuery = true) 
 	public List<Prenotazione> findPrenotazione(Long campo_id, LocalDate data, LocalTime oraInizio,
 												LocalTime oraFine);
 
@@ -28,4 +28,5 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 			+ "WHERE p.confermata=false and p.data_Di_Creazione < (LOCALTIMESTAMP - interval '10 minutes')", 
 			nativeQuery = true)
 	public void deleteAfter10Minutes();
+
 }
