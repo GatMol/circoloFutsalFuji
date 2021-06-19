@@ -94,8 +94,10 @@ public class PrenotazioneController {
 
 	@RequestMapping(value = "/confermaPrenotazione/{codice}", method = RequestMethod.GET)
 	public String confermaPrenotazione(Model model, @PathVariable("codice") String codiceConferma) {
+		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
 		Prenotazione prenotazione = this.prenotazioneService.prenotazionePerCodice(codiceConferma);
-		if(prenotazione==null) {
+		if(prenotazione==null || prenotazione.isConfermata()) {
+			model.addAttribute("prenotazione", prenotazione);
 			return "erroreConferma.html";
 		}
 		else {
