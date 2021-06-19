@@ -32,21 +32,21 @@
                 <!--form nome e cognome-->
                 <div th:object="${utente}"  id="formNomeCognome" class="elementoForm">
                     <div class="elementoNomeCognome">
-                        <div th:text="#{nome}">Nome *</div>
+                        <div th:text="#{nome} + ' *'">Nome *</div>
                         <div>
                             <input minlength="2" maxlength="20" th:field="*{nome}" class="inputMedio" type="text"
                             name="nome"/>
                         </div>
                     </div>
                     <div class="elementoNomeCognome prenotazioneVerticale">
-                        <div th:text="#{cognome}">Cognome *</div>
+                        <div th:text="#{cognome} + ' *'">Cognome *</div>
                         <input minlength="2" maxlength="20" th:field="*{cognome}" class="inputMedio" type="text" name="cognome"/>
                     </div>
                 </div>
                 <!--form email-->
                 <div th:object="${utente}" class="elementoMailTele">
                     <div  class="elementoForm prenotazioneVerticale">
-                        <div th:text="#{email}">Email *</div>
+                        <div th:text="#{email} + ' *'">Email *</div>
                         <input minlength="3" th:field="*{email}" class="inputLungo" type="text"
                         name="email"/>
                     </div>
@@ -54,7 +54,7 @@
                 <!--form numero di telefono-->
                 <div th:object="${utente}" class="elementoMailTele">
                     <div class="elementoForm prenotazioneVerticale">
-                        <div th:text="#{telefono}">Telefono *</div>
+                        <div th:text="#{telefono} + ' *'">Telefono *</div>
                         <input  
                          th:field="*{telefono}" class="inputLungo" type="text"
                          name="telefono"/>
@@ -62,35 +62,12 @@
                 </div>
                 <!--form data-->
                 <div th:object="${prenotazione}" id="formData" class="prenotazioneVerticale">
-                    <div th:text="#{data}" id="data">Data *</div>
+                    <div th:text="#{data} + ' *'" id="data">Data *</div>
                     <div>
                         <input th:field="*{data}" id="inputdata"
                         type="date" value="2021-11-09" name="data"/>
                     </div>
-                    <!--
-                    <div class="prenotazioneOrizzontale elementoForm">
-                        <div class="prenotazioneVerticale">
-                            <div>
-                                <input maxlength="2"
-                                 th:field="*{giorno}" class="inputPiccolo" type="numero"
-                                 name="giorno"/>
-                                <div>DD*</div>
-                            </div>
-                        </div>
-                        <div>
-                            <input maxlength="2" th:field="*{mese}" class="inputPiccolo" type="text"
-                            name="mese"/>
-                            <div>MM*</div>
-                        </div>
-                        <div>
-                           <input maxlength="4"
-                            minlength="4"
-                            th:field="*{anno}" class="inputPiccolo" type="text"
-                            name="anno"/>
-                            <div>YYYY*</div>
-                        </div>
-
-                    </div>-->
+                    
                 </div>
                 <!--form orario-->
                 <div th:object="${prenotazione}" class="prenotazioneOrizzontale elementoForm">
@@ -100,15 +77,16 @@
                         class="inputPiccolo" type="time" step="1800"
                         min="8:00" max="22:00"  
                         name="hinizio"/>
-                        <div th:text="#{oraI}">h inizio*</div>
+                        <div th:text="#{oraI} + ' *'">h inizio*</div>
                     </div>
                     <!--form ora fine-->
                     <div class="elementoForm">
                         <input 
-                         class="inputPiccolo" type="time" step="1800"
+                         class="inputPiccolo" type="time"
+                         step="1800"
                          min="9:00" max="23:00"
                          name="hfine"/>
-                        <div th:text="#{oraF}">h fine*</div>
+                        <div th:text="#{oraF} + ' *'">h fine*</div>
                     </div>
                 </div>
             </div>
