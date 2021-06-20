@@ -101,6 +101,7 @@ button{
 	font-size: calc(0.3rem + 0.8vw);
 	border-color: black;
 	margin-top: 3%;
+	text-transform: uppercase;
 }
 
 

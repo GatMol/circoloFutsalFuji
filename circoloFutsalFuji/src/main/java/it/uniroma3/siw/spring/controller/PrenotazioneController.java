@@ -2,8 +2,6 @@ package it.uniroma3.siw.spring.controller;
 
 import java.time.LocalDateTime;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +24,6 @@ import it.uniroma3.siw.spring.util.OraParser;
 @Controller
 public class PrenotazioneController {
 
-	private static final Logger logger = LogManager.getLogger(PrenotazioneController.class);
-
 	@Autowired
 	private PrenotazioneService prenotazioneService;
 
@@ -43,15 +39,8 @@ public class PrenotazioneController {
 	@Autowired
 	private UtenteValidator utenteValidator;
 
-	@RequestMapping(value = "/prenotaUnCampo", method = RequestMethod.GET)
-	public String iniziaPrenotazione(Model model) {
-		model.addAttribute("campi", this.campoService.tutti());
-		return "campi.html";
-	}
-
 	@RequestMapping(value = "/prenota", method = RequestMethod.GET)
 	public String prenotaCampo(@ModelAttribute("campo_id") Long campo_id, Model model) {
-		logger.debug(campo_id);
 		model.addAttribute("campo_id", campo_id);
 		model.addAttribute("campo", campoService.campoPerId(campo_id));
 		model.addAttribute("prenotazione", new Prenotazione());
@@ -62,16 +51,23 @@ public class PrenotazioneController {
 
 	@RequestMapping(value = "/addPrenotazione", method = RequestMethod.POST)
 	public String addPrenotazione(@ModelAttribute("utente") Utente utente, @ModelAttribute("campo_id") Long campo_id,
-			@ModelAttribute("hinizio") String hinizio, @ModelAttribute("hfine") String hfine,
-			@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model, BindingResult bindingResult) {
+								  @ModelAttribute("hinizio") String hinizio, @ModelAttribute("hfine") String hfine,
+								  @ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,
+								  BindingResult bindingResult) {
 
-		OraParser.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
+		prenotazione.setOrarioInizio(OraParser.effettuaParse(hinizio, bindingResult));
+		prenotazione.setOrarioFine(OraParser.effettuaParse(hfine, bindingResult));
 
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validaUtente(utente, bindingResult);
-
+		
 		if (!bindingResult.hasErrors()) {
+			
+			/*rimuovile prima di cercare se ci sono conflitti con questa prenotazione*/
+			this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
+			
 			if (!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
+				
 				Campo campo = campoService.campoPerId(campo_id);
 				prenotazione.setUtente(utente);
 				prenotazione.setDataDiCreazione(LocalDateTime.now());
@@ -88,6 +84,7 @@ public class PrenotazioneController {
 				bindingResult.reject("prenotazione.duplicato");
 			}
 		}
+		
 		model.addAttribute("campo_id", campo_id);
 		model.addAttribute("campo", campoService.campoPerId(campo_id));
 		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
