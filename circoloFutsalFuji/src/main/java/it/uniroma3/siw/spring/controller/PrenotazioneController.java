@@ -66,7 +66,7 @@ public class PrenotazioneController {
 				model.addAttribute("campi", campoService.tutti());
 				return "campi.html";
 			}else {
-				bindingResult.reject("duplicato");
+				bindingResult.reject("prenotazione.duplicato");
 				model.addAttribute("campo_id", campo_id);
 				model.addAttribute("campo", campoService.campoPerId(campo_id));
 				return"prenotazione.html";

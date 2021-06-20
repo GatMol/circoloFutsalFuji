@@ -1,26 +1,28 @@
 package it.uniroma3.siw.spring.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 public @Data class Campo {
 	
+	public Campo() {
+		this.prenotazioni = new ArrayList<Prenotazione>();
+	}
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@Column(nullable = false)
@@ -44,7 +46,7 @@ public @Data class Campo {
 	@Column(nullable = false)
 	private String img2;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name = "campo_id")
 	private List<Prenotazione> prenotazioni;
 

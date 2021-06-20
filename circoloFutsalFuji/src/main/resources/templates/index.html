@@ -10,9 +10,7 @@
     <section>
         <div id="sezioneImmagine">
             <img th:src="@{/images/calcio.png}" />
-                <a th:href="@{/prenotaUnCampo}" href="prenotazione.html" id="prenotaUnCampo" class="bottone-info">
-                <a th:href="@{/campi}" id="prenotaUnCampo">
-                    PRENOTA UN CAMPO
+                <a th:href="@{/prenotaUnCampo}" th:text="#{prenotaUnCampo}" id="prenotaUnCampo" class="bottone-info">
                 </a>
         </div>
         <div id="sezioneCentrale">

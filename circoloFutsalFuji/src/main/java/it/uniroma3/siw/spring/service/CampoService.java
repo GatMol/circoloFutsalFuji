@@ -45,4 +45,10 @@ public class CampoService {
 	public void rimuoviCampoPerId(Long id) {
 		this.campoRepository.deleteById(id);
 	}
+
+	@Transactional
+	public void rimuoviTutti() {
+		this.campoRepository.deleteAll();
+		
+	}
 }
