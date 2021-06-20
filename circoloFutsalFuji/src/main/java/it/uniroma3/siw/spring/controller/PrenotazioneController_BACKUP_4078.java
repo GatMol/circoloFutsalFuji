@@ -80,12 +80,24 @@ public class PrenotazioneController {
 
 				String email = utente.getEmail().trim();
 				String codice = prenotazione.getCodice();
+<<<<<<< HEAD
+				emailService.sendSimpleMessage(email, "Conferma prenotazione", 
+						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
+				model.addAttribute("campi", campoService.tutti());
+				return "campi.html";
+			}else {
+				bindingResult.reject("prenotazione.duplicato");
+				model.addAttribute("campo_id", campo_id);
+				model.addAttribute("campo", campoService.campoPerId(campo_id));
+				return"prenotazione.html";
+=======
 				emailService.inviaCodicePerEmail(email, campo.getId(), prenotazione.getData(), hinizio, hfine, codice);
 
 				model.addAttribute("campi", this.campoService.tutti());
 				return "campi.html";
 			} else {
 				bindingResult.reject("prenotazione.duplicato");
+>>>>>>> 199feae43e4e87160cc007a45c07f87a18a2ddd2
 			}
 		}
 		model.addAttribute("campo_id", campo_id);

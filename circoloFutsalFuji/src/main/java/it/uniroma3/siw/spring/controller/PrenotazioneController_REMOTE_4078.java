@@ -21,7 +21,6 @@ import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
 import it.uniroma3.siw.spring.service.PrenotazioneService;
-import it.uniroma3.siw.spring.util.OraParser;
 
 @Controller
 public class PrenotazioneController {
@@ -65,7 +64,7 @@ public class PrenotazioneController {
 			@ModelAttribute("hinizio") String hinizio, @ModelAttribute("hfine") String hfine,
 			@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model, BindingResult bindingResult) {
 
-		OraParser.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
+		prenotazioneValidator.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
 
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validaUtente(utente, bindingResult);

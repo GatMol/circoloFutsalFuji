@@ -19,7 +19,7 @@
         		<li class="nav_link"><a th:href="@{/}">Home</a></li>
         		<li class="nav_link" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/default}" th:text="#{gestisci}">Gestisci</a></li>
         		<li class="nav_link"><a th:href="@{/campi}" th:text="#{campi}">Campi</a></li>
-        		<li class="nav_link"><a href="footer" th:text="#{chisiamo}">Chi siamo</a></li>
+        		<li class="nav_link"><a href="#footer" th:text="#{contatti}">Contatti</a></li>
       		</ul>
     	</nav>
 	</header>

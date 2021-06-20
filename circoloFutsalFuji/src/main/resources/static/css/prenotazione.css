@@ -3,8 +3,6 @@
 	display: flex;
 	height: auto;
 	width: 100%;
-	margin-left: 20%:
-	margin-right: 20%: 
 }
 
 .prenotazioneOrizzontale{
@@ -71,7 +69,7 @@
 }
 
 .inputPiccolo{
-	width: 60%;
+	width: 100%;
 	height: 25px;
 }
 

@@ -46,23 +46,18 @@ public @Data class Prenotazione {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Utente utente;
 	
-	public Prenotazione(LocalDateTime dataDiCreazione) {
+	public Prenotazione() {
 		this.confermata = false;
 		this.codice = getUniqueCode();
-		this.dataDiCreazione = dataDiCreazione;
 	}
-	
-	public Prenotazione() {
-		this(LocalDateTime.now());
-	}
-	
 	
 	public Prenotazione(LocalDate data, LocalTime orarioInizio, LocalTime orarioFine,
 			LocalDateTime dataDiCreazione) {
-		this(dataDiCreazione);
+		this();
 		this.data = data;
 		this.orarioInizio = orarioInizio;
 		this.orarioFine = orarioFine;
+		this.dataDiCreazione = dataDiCreazione;
 	}
 	
 	private String getUniqueCode() {

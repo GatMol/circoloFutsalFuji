@@ -51,4 +51,9 @@ public class CampoService {
 		this.campoRepository.deleteAll();
 		
 	}
+
+	@Transactional
+	public boolean alreadyExists(Campo campo) {
+		return this.campoRepository.existsById(campo.getId());
+	}
 }

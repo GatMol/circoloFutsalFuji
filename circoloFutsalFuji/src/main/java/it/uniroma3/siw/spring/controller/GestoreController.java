@@ -20,17 +20,26 @@ import it.uniroma3.siw.spring.controller.validator.CampoValidator;
 import it.uniroma3.siw.spring.middleware.FileUploadUtil;
 import it.uniroma3.siw.spring.model.Campo;
 import it.uniroma3.siw.spring.service.CampoService;
+import it.uniroma3.siw.spring.service.PrenotazioneService;
 
 @Controller
-public class GestoreCampoController {
+public class GestoreController {
 
 	@Autowired
 	private CampoService campoService;
 
 	@Autowired
 	private CampoValidator campoValidator;
+
+	@Autowired
+	private PrenotazioneService prenotazioneService;
 	
-	private static final Logger logger = LogManager.getLogger(GestoreCampoController.class);
+	private static final Logger logger = LogManager.getLogger(GestoreController.class);
+	
+	@RequestMapping(value = "/gestore", method = RequestMethod.GET)
+	public String getGestore(Model model) {
+		return "gestore.html";
+	}
 	
 	@RequestMapping(value = "/admin/aggiungiCampo", method = RequestMethod.GET)
 	public String newCampo(Model model) {
@@ -66,7 +75,6 @@ public class GestoreCampoController {
 				campoBindingResult.rejectValue("img2", "required");
 				return "admin/aggiungiCampoForm.html";
 			}
-
 			model.addAttribute("campi", this.campoService.tutti());
 			return "campi.html";
 		}
@@ -79,12 +87,20 @@ public class GestoreCampoController {
 	@RequestMapping(value = "/admin/rimuoviCampo", method = RequestMethod.GET)
 	public String showCampiAdmin(Model model) {
 		model.addAttribute("campi", this.campoService.tutti());
-		return "admin/campiAdmin.html";
+		return "campi.html";
 	}
 	
-	@RequestMapping(value = "/admin/rimuoviCampo/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/rimuoviCampo/{id}", method = RequestMethod.GET)
 	public String rimuoviCampi(Model model, @PathVariable("id") Long id) {
 		this.campoService.rimuoviCampoPerId(id);
-		return this.showCampiAdmin(model);
+		model.addAttribute("campi", this.campoService.tutti());
+		return "campi.html";
+	}
+	
+	@RequestMapping(value = "/admin/prenotazioni", method = RequestMethod.GET)
+	public String getPrenotazioni(Model model) {
+		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
+		model.addAttribute("prenotazioni", this.prenotazioneService.tutteLePrenotazioni());
+		return "admin/prenotazioni.html";
 	}
 }

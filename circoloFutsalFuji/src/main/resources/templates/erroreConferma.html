@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/base.html :: headerfiles('pageTitle.erroreConferma')"></head>
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/css/erroreConferma.css}"/>
+</head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<section>
+<img th:src="@{/images/404.svg}"></img>
+<h1 th:if="${prenotazione}" th:text="#{erroreGiaConfermata}" id="errore-text">La prenotazione e' gia' confermata!</h1>
+<h1 th:unless="${prenotazione}" th:text="#{erroreConferma}" id="errore-text">La prenotazione e' scaduta o non esiste...</h1>
+</section>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

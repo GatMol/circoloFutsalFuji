@@ -1,0 +1,55 @@
+h1 {
+	text-align: center;
+	font-size: 3em;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table {
+	border-collapse: collapse;
+	min-width: 650px;
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(255,255,255,0.30);
+}
+
+thead {
+	background-color: white;
+	color: black;
+	text-align: left;
+	font-size: calc(0.3rem + 1vw);
+}
+
+th, td {
+  padding: 15px 18px;
+}
+
+tbody tr {
+	border-bottom: 1px solid white;
+  	font-size: calc(0.2rem + 1vw);
+}
+
+tbody td:first-of-type {
+	border-right: 1px solid white;
+}
+
+tbody tr:last-of-type {
+	border-bottom: 2px solid white;
+}
+
+.icona-conferma {
+	color: green;
+}
+
+.icona-noConferma {
+	color: red;
+}
+
+.conferma-contenuto {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

@@ -31,7 +31,7 @@
 			</div>
 			
 			<div id="info-campo" th:if=${campo} th:object="${campo}">
-				<div id="campo" th:text="#{campo} + *{id}">CAMPO 1</div>
+				<div id="campo" th:text="|#{campo} *{id}|">CAMPO 1</div>
 				<div id="info-text">
 				<ul>
 					<li>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/base.html :: headerfiles(#{pageTitle.prenotazioni})"></head>
+<head></head>
+<body>
+<header th:replace="fragments/base.html :: intestazione"></header>
+<head>
+<link th:href="@{/css/prenotazioni.css}" type="text/css" rel="stylesheet"/>
+</head>
+<section>
+<h1>PRENOTAZIONI</h1>
+<table id="content">
+	<thead>
+	<tr id="nome-colonne">
+		<th></th>
+		<th>Id</th>
+		<th th:text="#{data}">Data</th>
+		<th th:text="#{inizioPartita}">Inizio partita</th>
+		<th th:text="#{finePartita}">Fine partita</th>
+		<th th:text="#{confermata}">Confermata</th>
+		<th th:text="#{orarioPrenotazione}">Prenotato alle</th>
+		<th>Email</th>
+		<th th:text="#{telefono}">Telefono</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="prenotazione : ${prenotazioni}">
+		<td th:text="${prenotazioneStat.count}"></td>
+		<td th:text="${prenotazione.id}">id</td>
+		<td th:text="${prenotazione.data}">data</td>
+		<td th:text="${prenotazione.orarioInizio}">orarioInizio</td>
+		<td th:text="${prenotazione.orarioFine}">orarioFine</td>
+		<td>
+			<div class="conferma-contenuto">
+			<ion-icon th:if="${prenotazione.confermata}" class="icona-conferma" size="large" name="checkmark-circle-outline"></ion-icon></span>
+			<ion-icon th:unless="${prenotazione.confermata}" class="icona-noConferma" size="large" name="close-circle-outline"></ion-icon></span>
+			</div>
+		</td>
+		<td th:text="${prenotazione.dataDiCreazione}">dataDiCreazione</td>
+		<td th:text="${prenotazione.utente.email}">email</td>
+		<td th:text="${prenotazione.utente.telefono}">telefono</td>
+	</tr>
+	</tbody>
+</table>
+</section>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

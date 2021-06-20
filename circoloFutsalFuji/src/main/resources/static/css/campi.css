@@ -54,6 +54,11 @@
 	width: 50%;
 }
 
+.bottoni {
+	display: flex;
+	justify-content: space-between;
+}
+
 /* BottoneInformati */
 .bottone-info {
 	display: flex;
@@ -66,8 +71,7 @@
 	border-radius: 10px;
 	font-size: calc(1rem + 1vw);
 	outline: none;
-	height: 12%;
-	width: 50%;
+	width: 40%;
 	z-index: 1;
 	overflow: hidden;
 	cursor: pointer;
@@ -98,6 +102,24 @@
 .bottone-info:hover:before {
     transform: translateX(0%);
     transition: transform .3s ease-in;
+}
+
+.bottone-info:hover {
+	color: white;
+}
+
+.bottone-rimuovi {
+	color: darkred;
+	border: 2px solid darkred;
+	background-color: black;
+}
+
+.bottone-rimuovi:hover {
+	color: white;
+}
+
+.bottone-rimuovi:before {
+	background-color: darkred;
 }
 
 .img-campo {

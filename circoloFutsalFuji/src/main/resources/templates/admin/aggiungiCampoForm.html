@@ -18,7 +18,7 @@
 					<div class="name-field" th:text="#{campo.lunghezza}">
 						Lunghezza
 					</div>
-					<input type="number" min="25" max="42" th:field="*{lunghezza}"/>
+					<input type="number" th:field="*{lunghezza}"/>
 				</span>
 				<span class="errori" th:if="${#fields.hasErrors('lunghezza')}" 
                 	th:errors="*{lunghezza}" th:style="'color:red'">
@@ -29,7 +29,7 @@
                 	<div class="name-field" th:text="#{campo.larghezza}">
                 	Larghezza
                 	</div>
-                	<input type="number" min="15" max="25" th:field="*{larghezza}"/>
+                	<input type="number" th:field="*{larghezza}"/>
                 </span>
                 <span class="errori" th:if="${#fields.hasErrors('larghezza')}" 
                 	th:errors="*{larghezza}" th:style="'color:red'">
@@ -41,11 +41,11 @@
                 	Tipo Campo
                 	</div>
                 	<div>
-                		<input class="radio" id="outdoor" type="radio" name="tipoCampo" value="outdoor" th:field="*{tipoCampo}"/>
+                		<input class="radio" id="outdoor" type="radio" name="tipoCampo" value="Outdoor" th:field="*{tipoCampo}"/>
                 		<label for="outdoor">Outdoor</label>
                 	</div>
                 	<div>
-                		<input class="radio" id="indoor" type="radio" name="tipoCampo" value="indoor" th:field="*{tipoCampo}"/>
+                		<input class="radio" id="indoor" type="radio" name="tipoCampo" value="Indoor" th:field="*{tipoCampo}"/>
                 		<label for="indoor">Indoor</label>
                 	</div>
                	</span>
@@ -60,15 +60,15 @@
                 	</div>
                 	<select type="text"  th:field="*{tipoTerreno}">
                 		<optgroup label="Outdoor Sintetico">
-                		<option value="sintetico" th:text="#{campo.tipoTerreno.sintetico1}" selected>Sintetico prima gen.</option>
-                		<option value="sintetico" th:text="#{campo.tipoTerreno.sintetico2}">Sintetico seconda gen.</option>
-                		<option value="sintetico" th:text="#{campo.tipoTerreno.sintetico3}">Sintetico terza gen.</option>
-                		<option value="sintetico" th:text="#{campo.tipoTerreno.sintetico4}">Sintetico quarta gen.</option>
+                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico1}" selected>Sintetico prima gen.</option>
+                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico2}">Sintetico seconda gen.</option>
+                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico3}">Sintetico terza gen.</option>
+                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico4}">Sintetico quarta gen.</option>
                 		</optgroup>
                 		<optgroup label="Indoor">
-                		<option value="parquet" >Parquet</option>
-                		<option value="gomma" th:text="#{campo.tipoTerreno.gomma}">Gomma</option>
-                		<option value="pvc">PVC</option>
+                		<option value="Parquet">Parquet</option>
+                		<option value="Gomma" th:text="#{campo.tipoTerreno.gomma}">Gomma</option>
+                		<option value="PVC">PVC</option>
                 		</optgroup>
                 	</select>
                 </span>
@@ -86,6 +86,16 @@
                 <span class="errori" th:if="${#fields.hasErrors('prezzo')}" 
                 	th:errors="*{prezzo}" th:style="'color:red'">
                 </span>
+             </div>
+             <div class="container-fiels">
+             	<span>
+             		<div class="name-field" th:text="#{campo.numero}">Numero campo</div>
+             		<input type="number" min="0" th:field="*{id}"/>
+             	</span>
+             	<span th:if="${#fields.hasGlobalErrors()}">
+             		<div class="errori" th:each="err : ${#fields.globalErrors()}" th:text="${err}"
+             		th:style="'color:red'"></div>
+             	</span>
              </div>
 		</div>
 		<div id="right-form">

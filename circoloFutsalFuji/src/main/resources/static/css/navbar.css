@@ -1,22 +1,3 @@
-
-/*nav{
-	height: 60px;
-	width: 80%;
-	display: flex;
-	justify-content: space-between;
-	position: fixed;
-	top: 0px;
-	background-color: black;
-	z-index: 1;
-}*/
-
-/*.elementoNavBar{
-	width: 50%;
-}
-
-#titolo{
-	font-size: calc(1.5rem + 1.25vw);
-}*/
 /*=======
   NavBar
   =======	
@@ -38,25 +19,11 @@
 }
 
 #menu{
-	/*width: 30%;
 	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	font-size: calc(0.75rem +1.5vw);*/
-	display: flex;
-	justify-content: space-around;
-	flex-grow: 1;
+	justify-content: space-between;
+	width: 40%;
 	font-size: calc(0.5rem + 1vw);
 }
-
-/*a{
-	text-decoration: none;
-	color: white;
-}
-
-a:focus{
-	color: white;
-}*/
 
 #menu a {
 	text-decoration: none;
