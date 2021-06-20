@@ -2,11 +2,8 @@ package it.uniroma3.siw.spring.controller.validator;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -49,16 +46,6 @@ public class PrenotazioneValidator implements Validator{
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Prenotazione.class.equals(clazz);
-	}
-	
-	public void effettuaParse(String hinizio, String hfine, Prenotazione prenotazione, BindingResult bindingResult) {
-		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-			prenotazione.setOrarioInizio(LocalTime.parse(hinizio, formatter));
-			prenotazione.setOrarioFine(LocalTime.parse(hfine, formatter));
-		}catch(DateTimeParseException e){
-			bindingResult.reject("oravuota");
-		}
 	}
 
 }

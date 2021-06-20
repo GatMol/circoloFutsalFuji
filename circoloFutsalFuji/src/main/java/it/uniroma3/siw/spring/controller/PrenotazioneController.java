@@ -21,6 +21,7 @@ import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
 import it.uniroma3.siw.spring.service.PrenotazioneService;
+import it.uniroma3.siw.spring.util.OraParser;
 
 @Controller
 public class PrenotazioneController {
@@ -42,11 +43,13 @@ public class PrenotazioneController {
 	@Autowired
 	private UtenteValidator utenteValidator;
 
-	@RequestMapping(value = "/prenotaUnCampo", method = RequestMethod.GET)
-	public String iniziaPrenotazione(Model model) {
-		model.addAttribute("campi", this.campoService.tutti());
-		return "campi.html";
-	}
+	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
+	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
+			@ModelAttribute("campo_id") Long campo_id,
+			@ModelAttribute("hinizio") String hinizio,
+			@ModelAttribute("hfine") String hfine,
+			@ModelAttribute("prenotazione") Prenotazione prenotazione,
+			Model model, BindingResult bindingResult) {
 
 	@RequestMapping(value = "/prenota", method = RequestMethod.GET)
 	public String prenotaCampo(@ModelAttribute("campo_id") Long campo_id, Model model) {
@@ -65,6 +68,7 @@ public class PrenotazioneController {
 			@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model, BindingResult bindingResult) {
 
 		prenotazioneValidator.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
+		OraParser.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
 
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validaUtente(utente, bindingResult);

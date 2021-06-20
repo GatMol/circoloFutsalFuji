@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 100px;
+	margin-bottom: 100px; 
 }
 
 .contenitore{
@@ -51,6 +51,12 @@
 
 button{
 	position: relative;
-	top: 420px;
+	top: 350px;
+	left: 25%;
+}
+
+.errori{
+	margin-left: 10%;
+	margin-right: 10%;
 }
 }
