@@ -2,17 +2,22 @@ package it.uniroma3.siw.spring.controller.validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.spring.model.Campo;
+import it.uniroma3.siw.spring.service.CampoService;
 
 @Component
 public class CampoValidator implements Validator {
 
 	private final Logger logger = LoggerFactory.getLogger(CampoValidator.class);
+	
+	@Autowired
+	private CampoService campoService;
 	
 	public void validate(Object o, Errors errors) {
 		Campo campo = (Campo) o;
@@ -25,6 +30,7 @@ public class CampoValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prezzo", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "img1", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "img2", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id", "required");
 
 		if (!errors.hasFieldErrors("lunghezza")) {
 			int lunghezza = campo.getLunghezza();
@@ -60,6 +66,11 @@ public class CampoValidator implements Validator {
 			int prezzo = campo.getPrezzo();
 			if (prezzo < 0)
 				errors.rejectValue("prezzo", "negativo");
+		}
+		
+		if(!errors.hasErrors()) {
+			if(campoService.alreadyExists(campo))
+				errors.reject("campo.duplicato");
 		}
 	}
 

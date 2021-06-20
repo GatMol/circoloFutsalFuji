@@ -18,7 +18,7 @@
 					<div class="name-field" th:text="#{campo.lunghezza}">
 						Lunghezza
 					</div>
-					<input type="number" min="25" max="42" th:field="*{lunghezza}"/>
+					<input type="number" th:field="*{lunghezza}"/>
 				</span>
 				<span class="errori" th:if="${#fields.hasErrors('lunghezza')}" 
                 	th:errors="*{lunghezza}" th:style="'color:red'">
@@ -29,7 +29,7 @@
                 	<div class="name-field" th:text="#{campo.larghezza}">
                 	Larghezza
                 	</div>
-                	<input type="number" min="15" max="25" th:field="*{larghezza}"/>
+                	<input type="number" th:field="*{larghezza}"/>
                 </span>
                 <span class="errori" th:if="${#fields.hasErrors('larghezza')}" 
                 	th:errors="*{larghezza}" th:style="'color:red'">
@@ -86,6 +86,16 @@
                 <span class="errori" th:if="${#fields.hasErrors('prezzo')}" 
                 	th:errors="*{prezzo}" th:style="'color:red'">
                 </span>
+             </div>
+             <div class="container-fiels">
+             	<span>
+             		<div class="name-field" th:text="#{campo.numero}">Numero campo</div>
+             		<input type="number" min="0" th:field="*{id}"/>
+             	</span>
+             	<span th:if="${#fields.hasGlobalErrors()}">
+             		<div class="errori" th:each="err : ${#fields.globalErrors()}" th:text="${err}"
+             		th:style="'color:red'"></div>
+             	</span>
              </div>
 		</div>
 		<div id="right-form">

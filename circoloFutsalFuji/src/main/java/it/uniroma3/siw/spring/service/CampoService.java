@@ -45,4 +45,9 @@ public class CampoService {
 	public void rimuoviCampoPerId(Long id) {
 		this.campoRepository.deleteById(id);
 	}
+
+	@Transactional
+	public boolean alreadyExists(Campo campo) {
+		return this.campoRepository.existsById(campo.getId());
+	}
 }

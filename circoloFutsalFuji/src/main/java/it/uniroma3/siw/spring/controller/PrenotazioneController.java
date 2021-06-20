@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import it.uniroma3.siw.spring.EmailService;
 import it.uniroma3.siw.spring.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.spring.controller.validator.UtenteValidator;
+import it.uniroma3.siw.spring.model.Campo;
 import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Utente;
 import it.uniroma3.siw.spring.service.CampoService;
@@ -67,28 +68,28 @@ public class PrenotazioneController {
 
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validaUtente(utente, bindingResult);
-		if (!bindingResult.hasErrors()) {
 
+		if (!bindingResult.hasErrors()) {
 			if (!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
+				Campo campo = campoService.campoPerId(campo_id);
 				prenotazione.setUtente(utente);
 				prenotazione.setDataDiCreazione(LocalDateTime.now());
-				campoService.campoPerId(campo_id).aggiungiPrenotazione(prenotazione);
+				campo.aggiungiPrenotazione(prenotazione);
 				prenotazioneService.inserisci(prenotazione);
+
 				String email = utente.getEmail().trim();
 				String codice = prenotazione.getCodice();
-				emailService.sendSimpleMessage(email, "Conferma prenotazione",
-						"Codice per confermare la prenotazione: http://localhost:8090/confermaPrenotazione/" + codice);
+				emailService.inviaCodicePerEmail(email, campo.getId(), prenotazione.getData(), hinizio, hfine, codice);
+
 				model.addAttribute("campi", this.campoService.tutti());
 				return "campi.html";
 			} else {
-				bindingResult.reject("duplicato");
-				model.addAttribute("campo_id", campo_id);
-				model.addAttribute("campo", campoService.campoPerId(campo_id));
-				return "prenotazione.html";
+				bindingResult.reject("prenotazione.duplicato");
 			}
 		}
 		model.addAttribute("campo_id", campo_id);
 		model.addAttribute("campo", campoService.campoPerId(campo_id));
+		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
 		return "prenotazione.html";
 	}
 
@@ -96,11 +97,10 @@ public class PrenotazioneController {
 	public String confermaPrenotazione(Model model, @PathVariable("codice") String codiceConferma) {
 		this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
 		Prenotazione prenotazione = this.prenotazioneService.prenotazionePerCodice(codiceConferma);
-		if(prenotazione==null || prenotazione.isConfermata()) {
+		if (prenotazione == null || prenotazione.isConfermata()) {
 			model.addAttribute("prenotazione", prenotazione);
 			return "erroreConferma.html";
-		}
-		else {
+		} else {
 			prenotazione.setConfermata(true);
 			return "index.html";
 		}
