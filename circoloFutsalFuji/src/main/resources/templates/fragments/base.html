@@ -30,9 +30,9 @@
 		<div class="separatore"></div>
 		<div >futsalfuji@gmail.com</div>
 		<div class="separatore"></div>
-		<a th:href="@{/login}" th:text="#{gestore.login}">Login gestore</a>
+		<a th:text="#{ ${#authorization.expression('hasAnyAuthority(''ADMIN'')')} ? 'gestore.logout' : 'gestore.login'}"
+        th:href="@{ ${#authorization.expression('hasAnyAuthority(''ADMIN'')')} ? '/logout' : '/login'}">Login gestore</a>
 		<div class="separatore"></div>
-		<a th:href="@{/logout}" sec:authorize="hasAuthority('ADMIN')">Logout</a>
 	</footer>
 </body>
 </html>

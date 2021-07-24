@@ -94,15 +94,46 @@ input{
 button{
 	height: 50px;
 	width: 35%;
-	background-color: white;
-	color: black;
-	border-color: white;
-	border-radius: 2em;
-	font-size: calc(0.3rem + 0.8vw);
-	border-color: black;
 	margin-top: 3%;
+	position: relative;
+	color: ForestGreen;
+	border: 2px solid ForestGreen;
+	background-color: black;
+	border-radius: 10px;
+	font-size: calc(0.3rem + 1vw);
+	height: calc(2rem + 2vw);
+	width: calc(2rem + 15vw);
+	margin-top: 6%;
+	outline: none;
+	z-index: 1;
+	overflow: hidden;
+	cursor: pointer;
+	text-transform: uppercase;
 }
 
+button:hover {
+	color: white;
+    transition: color .4s ease-in;
+}
+
+button:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: ForestGreen;
+    transform: translateX(-101%);
+    transition: transform .2s ease-in;
+    z-index: -1;
+}
+
+button:hover:before {
+    transform: translateX(0%);
+    transition: transform .2s ease-in;
+}
 
 .errori{
 	margin-top: 12px;

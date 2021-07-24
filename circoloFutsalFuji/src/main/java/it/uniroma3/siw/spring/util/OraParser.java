@@ -9,15 +9,15 @@ import org.springframework.validation.BindingResult;
 import it.uniroma3.siw.spring.model.Prenotazione;
 
 public class OraParser {
-	
-	public static void effettuaParse(String hinizio, String hfine, Prenotazione prenotazione, BindingResult bindingResult) {
-		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-			prenotazione.setOrarioInizio(LocalTime.parse(hinizio, formatter));
-			prenotazione.setOrarioFine(LocalTime.parse(hfine, formatter));
-		}catch(DateTimeParseException e){
-			bindingResult.reject("oravuota");
-		}
-	}
+
+    public static LocalTime effettuaParse(String ora, BindingResult bindingResult) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            return LocalTime.parse(ora, formatter);
+        }catch(DateTimeParseException e){
+            bindingResult.reject("oravuota");
+            return null;
+        }
+    }
 
 }

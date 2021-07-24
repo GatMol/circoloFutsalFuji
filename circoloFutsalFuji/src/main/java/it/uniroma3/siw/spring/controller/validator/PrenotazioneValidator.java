@@ -32,8 +32,12 @@ public class PrenotazioneValidator implements Validator{
 				if(prenotazione.getOrarioFine().isBefore(LocalTime.now()))
 					errors.reject("ora.passata");
 			}
+			
 			if(prenotazione.getOrarioFine().isBefore(prenotazione.getOrarioInizio()))
 				errors.reject("orafine.prima");
+			
+			if(prenotazione.getOrarioFine().equals(prenotazione.getOrarioInizio()))
+				errors.reject("orariCoincidenti");
 			
 			if(prenotazione.getOrarioInizio().getHour() < 8 || prenotazione.getOrarioInizio().getHour() > 22)
 				errors.reject("oraInizio.oltre");

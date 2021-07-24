@@ -43,14 +43,6 @@ public class PrenotazioneController {
 	@Autowired
 	private UtenteValidator utenteValidator;
 
-	@RequestMapping(value="/addPrenotazione", method = RequestMethod.POST)
-	public String addPrenotazione(@ModelAttribute("utente") Utente utente, 
-			@ModelAttribute("campo_id") Long campo_id,
-			@ModelAttribute("hinizio") String hinizio,
-			@ModelAttribute("hfine") String hfine,
-			@ModelAttribute("prenotazione") Prenotazione prenotazione,
-			Model model, BindingResult bindingResult) {
-
 	@RequestMapping(value = "/prenota", method = RequestMethod.GET)
 	public String prenotaCampo(@ModelAttribute("campo_id") Long campo_id, Model model) {
 		logger.debug(campo_id);
@@ -67,13 +59,16 @@ public class PrenotazioneController {
 			@ModelAttribute("hinizio") String hinizio, @ModelAttribute("hfine") String hfine,
 			@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model, BindingResult bindingResult) {
 
-		prenotazioneValidator.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
-		OraParser.effettuaParse(hinizio, hfine, prenotazione, bindingResult);
+		prenotazione.setOrarioInizio(OraParser.effettuaParse(hinizio, bindingResult));
+        prenotazione.setOrarioFine(OraParser.effettuaParse(hfine, bindingResult));
 
 		prenotazioneValidator.validate(prenotazione, bindingResult);
 		utenteValidator.validaUtente(utente, bindingResult);
 
 		if (!bindingResult.hasErrors()) {
+			/*Rimuovile prima di cercare se ci sono conflitti con questa prenotazione*/
+			this.prenotazioneService.rimuoviPrenotazioniNonConfermate();
+			
 			if (!prenotazioneService.alreadyExists((Long) campo_id, prenotazione)) {
 				Campo campo = campoService.campoPerId(campo_id);
 				prenotazione.setUtente(utente);

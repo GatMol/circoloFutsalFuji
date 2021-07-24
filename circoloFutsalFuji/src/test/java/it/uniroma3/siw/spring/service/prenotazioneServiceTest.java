@@ -27,14 +27,18 @@ public class prenotazioneServiceTest {
 
 	@Autowired
 	private PrenotazioneService prenotazioneService;
+	
+	@BeforeEach
+	public void rimuoviPrenotazioniNelDb() {
+		this.prenotazioneService.rimuoviTutti();
+	}
 
 	@Autowired
 	private CampoService campoService;
 
 	private Prenotazione p1;
 	private Prenotazione p2;
-	private Prenotazione p3;
-	private Prenotazione p4Confermata;
+
 	private Campo campo;
 
 	private LocalDate dataOdierna;
@@ -47,22 +51,12 @@ public class prenotazioneServiceTest {
 	public void setUp() {
 		this.prenotazioneService.rimuoviTutti();
 		this.campoService.rimuoviTutti();
+
+		unGiornoPrima = LocalDateTime.now().minusDays(1);
+		LocalDateTime ventiMinutiPrima = LocalDateTime.now().minusMinutes(20);
 		
 		dataOdierna = LocalDate.now();
-		unGiornoPrima = LocalDateTime.now().minusDays(1);
-	
-	@BeforeEach
-	public void rimuoviPrenotazioniNelDb() {
-		this.prenotazioneService.rimuoviTutti();
-	}
 
-	@Test
-	public void rimozioneCollezioniNonConfermateTest() {
-		LocalDate dataOdierna = LocalDate.now();
-		LocalDateTime unGiornoPrima = LocalDateTime.now().minusDays(1);
-		LocalDateTime ventiMinutiPrima = LocalDateTime.now().minusMinutes(20);
-		LocalDateTime cinqueMinutiPrima = LocalDateTime.now().minusMinutes(5);
-		
 		LocalTime oraInizioP1 = LocalTime.now();
 		LocalTime oraFineP1 = oraInizioP1.plusHours(1);
 
@@ -86,19 +80,17 @@ public class prenotazioneServiceTest {
 
 	@Test
 	public void rimozioneCollezioniNonConfermateTest() {
+		
 		LocalTime oraInizioP3 = oraFineP2.plusHours(1);
 		LocalTime oraFineP3 = oraInizioP3.plusHours(1);
 		LocalTime oraInizioP4 = oraFineP3.plusHours(1);
 		LocalTime oraFineP4 = oraInizioP4.plusHours(1);
 		LocalDateTime cinqueMinutiPrima = LocalDateTime.now().minusMinutes(5);
-		p3 = new Prenotazione(dataOdierna, oraInizioP3, oraFineP3, cinqueMinutiPrima);
-		p4Confermata = new Prenotazione(dataOdierna, oraInizioP4, oraFineP4, unGiornoPrima);
-		
-		Prenotazione p1 = new Prenotazione(dataOdierna, oraInizioP1, oraFineP1, unGiornoPrima);
-		Prenotazione p2 = new Prenotazione(dataOdierna, oraInizioP2, oraFineP2, ventiMinutiPrima);
 		Prenotazione p3 = new Prenotazione(dataOdierna, oraInizioP3, oraFineP3, cinqueMinutiPrima);
 		
 		Prenotazione p4Confermata = new Prenotazione(dataOdierna, oraInizioP4, oraFineP4, unGiornoPrima);
+		p3 = new Prenotazione(dataOdierna, oraInizioP3, oraFineP3, cinqueMinutiPrima);
+		p4Confermata = new Prenotazione(dataOdierna, oraInizioP4, oraFineP4, unGiornoPrima);
 		p4Confermata.setConfermata(true);
 		
 		this.prenotazioneService.inserisci(p1);

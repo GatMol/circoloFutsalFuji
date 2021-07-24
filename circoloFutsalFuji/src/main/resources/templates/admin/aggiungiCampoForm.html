@@ -60,10 +60,10 @@
                 	</div>
                 	<select type="text"  th:field="*{tipoTerreno}">
                 		<optgroup label="Outdoor Sintetico">
-                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico1}" selected>Sintetico prima gen.</option>
-                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico2}">Sintetico seconda gen.</option>
-                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico3}">Sintetico terza gen.</option>
-                		<option value="Sintetico" th:text="#{campo.tipoTerreno.sintetico4}">Sintetico quarta gen.</option>
+                		<option th:value="#{campo.tipoTerreno.sintetico1}" th:text="#{campo.tipoTerreno.sintetico1}" selected>Sintetico prima gen.</option>
+                		<option th:value="#{campo.tipoTerreno.sintetico2}" th:text="#{campo.tipoTerreno.sintetico2}">Sintetico seconda gen.</option>
+                		<option th:value="#{campo.tipoTerreno.sintetico3}" th:text="#{campo.tipoTerreno.sintetico3}">Sintetico terza gen.</option>
+                		<option th:value="#{campo.tipoTerreno.sintetico4}" th:text="#{campo.tipoTerreno.sintetico4}">Sintetico quarta gen.</option>
                 		</optgroup>
                 		<optgroup label="Indoor">
                 		<option value="Parquet">Parquet</option>
